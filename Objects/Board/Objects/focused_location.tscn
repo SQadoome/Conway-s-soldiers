@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://k5jbhjip77vk"]
+
+[ext_resource type="Texture2D" uid="uid://c1rvttshl3kub" path="res://Textures/select_square.png" id="1_6ve3l"]
+[ext_resource type="Script" uid="uid://dyxapj5xn88uv" path="res://Scenes/focused_location.gd" id="2_380oq"]
+
+[node name="FocusedLocation" type="Sprite2D"]
+texture = ExtResource("1_6ve3l")
+script = ExtResource("2_380oq")

@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://233fwuivi5l3"]
+
+[ext_resource type="Script" uid="uid://fyhjayw6e521" path="res://Objects/Core/scene_handler.gd" id="1_42dlh"]
+[ext_resource type="PackedScene" uid="uid://bio8bodm2g8ny" path="res://Objects/GUI/main_menu.tscn" id="1_s1scv"]
+[ext_resource type="PackedScene" uid="uid://0mdxwbimb8gw" path="res://Objects/GUI/level_selector.tscn" id="3_adg4s"]
+
+[node name="SceneHandler" type="Node2D" node_paths=PackedStringArray("level_selector")]
+script = ExtResource("1_42dlh")
+level_selector = NodePath("CanvasLayer/LevelSelector")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MainMenu" parent="CanvasLayer" instance=ExtResource("1_s1scv")]
+
+[node name="LevelSelector" parent="CanvasLayer" instance=ExtResource("3_adg4s")]

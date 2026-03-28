@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlilwildnka2g"]
+
+[ext_resource type="Script" uid="uid://vqm5cyyua8f0" path="res://Scenes/fireworks.gd" id="1_1wxtt"]
+[ext_resource type="Script" uid="uid://k05f0dfgv0vv" path="res://Scenes/firework.gd" id="1_38q06"]
+
+[node name="Fireworks" type="Node2D"]
+z_index = 5
+script = ExtResource("1_1wxtt")
+
+[node name="Line2D" type="Line2D" parent="."]
+script = ExtResource("1_38q06")
+
+[node name="Line2D2" type="Line2D" parent="."]
+script = ExtResource("1_38q06")
+
+[node name="Line2D3" type="Line2D" parent="."]
+script = ExtResource("1_38q06")
+
+[node name="Line2D4" type="Line2D" parent="."]
+script = ExtResource("1_38q06")
+
+[node name="Line2D5" type="Line2D" parent="."]
+script = ExtResource("1_38q06")
+
+[node name="Line2D6" type="Line2D" parent="."]
+script = ExtResource("1_38q06")
+
+[node name="Line2D7" type="Line2D" parent="."]
+script = ExtResource("1_38q06")
+
+[node name="Line2D8" type="Line2D" parent="."]
+script = ExtResource("1_38q06")
+
+[node name="Line2D9" type="Line2D" parent="."]
+script = ExtResource("1_38q06")
+
+[node name="Line2D10" type="Line2D" parent="."]
+script = ExtResource("1_38q06")
+
+[node name="Line2D11" type="Line2D" parent="."]
+script = ExtResource("1_38q06")
+
+[node name="Line2D12" type="Line2D" parent="."]
+script = ExtResource("1_38q06")

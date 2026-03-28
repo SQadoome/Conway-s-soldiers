@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://dv3g05lo65ac6"]
+
+[ext_resource type="Script" uid="uid://dyu0kvmjw7x76" path="res://Objects/Board/Objects/ascend_tile.gd" id="1_ig1pw"]
+[ext_resource type="Texture2D" uid="uid://wx3k7kag0uas" path="res://Assets/Sprites/ascend_tile.png" id="2_2ebah"]
+[ext_resource type="Texture2D" uid="uid://c72wapy135gdg" path="res://Assets/Sprites/ascend_shine.png" id="3_873hf"]
+[ext_resource type="PackedScene" uid="uid://ck8joof0llo2w" path="res://Objects/hook_tile.tscn" id="4_txp6g"]
+[ext_resource type="Texture2D" uid="uid://d0e5vud05hnw6" path="res://Assets/Sprites/Soldier.png" id="5_cevbj"]
+
+[sub_resource type="Shader" id="Shader_cevbj"]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform float influence: hint_range(0.0, 1.0, 0.01) = 0.0;
+uniform float speed = 0.2;
+
+const float TWO_PI = PI*2.0;
+
+vec3 hsv2rgb(vec3 _c) {
+	vec4 _K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+	vec3 _p = abs(fract(_c.xxx + _K.xyz) * 6.0 - _K.www);
+	return _c.z * mix(_K.xxx, clamp(_p - _K.xxx, 0.0, 1.0), _c.y);
+}
+
+void fragment() {
+	//vec2 centered_pos = vec2(1.0, 1.0) - 2.0*UV;
+	vec2 centered_pos = -(2.0*UV - vec2(1.0, 1.0));
+
+	//COLOR.rgb += influence *  hsv2rgb(vec3(1.0 - TIME, 1.0, 1.0));
+
+	COLOR.rgb += influence * hsv2rgb(vec3(((atan(centered_pos.y, centered_pos.x)) / (PI*2.0)) - TIME*speed, length(centered_pos) * 5.0, 1.0) * 1.0);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ie7ou"]
+resource_local_to_scene = true
+shader = SubResource("Shader_cevbj")
+shader_parameter/influence = 0.0
+shader_parameter/speed = 0.2
+
+[node name="AscendTile" type="Node2D"]
+z_index = -1
+script = ExtResource("1_ig1pw")
+
+[node name="Tile" type="Sprite2D" parent="."]
+modulate = Color(0.843184, 0.843184, 0.843184, 1)
+texture = ExtResource("2_2ebah")
+
+[node name="Shine" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(5, 2)
+texture = ExtResource("3_873hf")
+
+[node name="HookTile" parent="." instance=ExtResource("4_txp6g")]
+visible = false
+
+[node name="Soldier" type="Sprite2D" parent="."]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_ie7ou")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_cevbj")

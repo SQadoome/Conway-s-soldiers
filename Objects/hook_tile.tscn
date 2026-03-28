@@ -1,0 +1,113 @@
+[gd_scene load_steps=9 format=3 uid="uid://ck8joof0llo2w"]
+
+[ext_resource type="Script" uid="uid://cguqp30quyomh" path="res://Objects/hook_tile.gd" id="1_0xrlt"]
+[ext_resource type="Texture2D" uid="uid://2j1ce80qjias" path="res://Assets/Sprites/ascend_assets.png" id="1_jvcch"]
+[ext_resource type="Texture2D" uid="uid://bkler4acueeph" path="res://Assets/Sprites/hook_tile_cracks.png" id="2_0xrlt"]
+[ext_resource type="PackedScene" uid="uid://c2ecs2pusiccf" path="res://cpu_particles_2d.tscn" id="4_q8k46"]
+
+[sub_resource type="Animation" id="Animation_o7wfq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cracks:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cracks:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_n0rxq"]
+resource_name = "break"
+
+[sub_resource type="Animation" id="Animation_q8k46"]
+resource_name = "crack"
+step = 0.02
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cracks:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.02, 0.04, 0.06, 0.08),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [4, 3, 2, 1, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cracks:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.02),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b85o8"]
+_data = {
+&"RESET": SubResource("Animation_o7wfq"),
+&"break": SubResource("Animation_n0rxq"),
+&"crack": SubResource("Animation_q8k46")
+}
+
+[node name="HookTile" type="Node2D"]
+script = ExtResource("1_0xrlt")
+
+[node name="BG" type="Sprite2D" parent="."]
+texture = ExtResource("1_jvcch")
+region_enabled = true
+region_rect = Rect2(442, 4, 66, 66)
+
+[node name="Hole" type="Node2D" parent="."]
+visible = false
+
+[node name="Body" type="Sprite2D" parent="Hole"]
+texture = ExtResource("1_jvcch")
+region_enabled = true
+region_rect = Rect2(368, 4, 68, 66)
+
+[node name="Shadow" type="Sprite2D" parent="Hole"]
+z_index = 2
+position = Vector2(0, 12)
+texture = ExtResource("1_jvcch")
+region_enabled = true
+region_rect = Rect2(308, 16, 50, 52)
+
+[node name="Cracks" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_0xrlt")
+hframes = 5
+frame = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_b85o8")
+}
+
+[node name="CPUParticles2D" parent="." instance=ExtResource("4_q8k46")]
+
+[node name="Breakout" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[connection signal="timeout" from="Breakout" to="." method="_on_breakout_timeout"]

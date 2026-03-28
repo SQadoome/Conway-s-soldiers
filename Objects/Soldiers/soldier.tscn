@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3k54h6ljvnlo"]
+
+[ext_resource type="Script" uid="uid://r5k1ug4u4pl5" path="res://Objects/Soldiers/soldier.gd" id="1_8l2r7"]
+[ext_resource type="Texture2D" uid="uid://d0e5vud05hnw6" path="res://Assets/Sprites/Soldier.png" id="2_53of6"]
+[ext_resource type="Shader" uid="uid://bkq8rks1krgdh" path="res://Objects/Soldiers/soldier.gdshader" id="2_q3ew8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q3ew8"]
+resource_local_to_scene = true
+shader = ExtResource("2_q3ew8")
+shader_parameter/influence = 0.0
+
+[node name="Soldier" type="Node2D"]
+script = ExtResource("1_8l2r7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_q3ew8")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_53of6")

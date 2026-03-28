@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2yf7y3ixg1de"]
+
+[ext_resource type="Script" uid="uid://r3qxrgtqtmmx" path="res://Objects/GUI/menu_object.gd" id="1_n23pw"]
+
+[node name="Object1" type="Control"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("1_n23pw")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1

@@ -1,0 +1,65 @@
+[gd_scene load_steps=12 format=3 uid="uid://b4pujd6ivxinl"]
+
+[ext_resource type="Script" uid="uid://v15ed0urbu40" path="res://Objects/Effects/ascend_hook.gd" id="1_ux06n"]
+[ext_resource type="Texture2D" uid="uid://8f0msqtd2jfr" path="res://Assets/Sprites/chains.png" id="2_a4bnb"]
+[ext_resource type="Texture2D" uid="uid://ckhru61t5djm" path="res://Assets/Sprites/hook.png" id="3_5nv8g"]
+[ext_resource type="Shader" uid="uid://btwdj6m1f6qna" path="res://Objects/Effects/tfryu.gdshader" id="4_5nv8g"]
+[ext_resource type="Shader" uid="uid://ctw0w30ftlsml" path="res://Objects/Effects/rgb.gdshader" id="4_a4bnb"]
+[ext_resource type="Shader" uid="uid://bkq8rks1krgdh" path="res://Objects/Soldiers/soldier.gdshader" id="4_s0pw2"]
+[ext_resource type="Texture2D" uid="uid://d0e5vud05hnw6" path="res://Assets/Sprites/Soldier.png" id="5_essvy"]
+[ext_resource type="AudioStream" uid="uid://bkvdrkxyeyil6" path="res://Assets/Audio/hook_slow_pull.wav" id="8_s0pw2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a4bnb"]
+shader = ExtResource("4_a4bnb")
+shader_parameter/influence = 0.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5nv8g"]
+shader = ExtResource("4_5nv8g")
+shader_parameter/influence = 0.1
+shader_parameter/speed = 0.7
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pacgh"]
+resource_local_to_scene = true
+shader = ExtResource("4_s0pw2")
+shader_parameter/influence = 0.0
+shader_parameter/speed = 0.2
+
+[node name="AscendHook" type="Node2D" node_paths=PackedStringArray("line", "hooked_soldier", "hook", "abductor")]
+z_index = 1
+script = ExtResource("1_ux06n")
+line = NodePath("Abducter/Line2D")
+hooked_soldier = NodePath("Abducter/Line2D/Hook/HookedSoldier")
+hook = NodePath("Abducter/Line2D/Hook")
+abductor = NodePath("Abducter")
+
+[node name="Abducter" type="Node2D" parent="."]
+
+[node name="Line2D" type="Line2D" parent="Abducter"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("ShaderMaterial_a4bnb")
+position = Vector2(-1, -1)
+points = PackedVector2Array(0, 0, 0, 0)
+width = 24.0
+texture = ExtResource("2_a4bnb")
+texture_mode = 1
+
+[node name="Hook" type="Sprite2D" parent="Abducter/Line2D"]
+texture_repeat = 1
+material = SubResource("ShaderMaterial_5nv8g")
+position = Vector2(2, 58)
+texture = ExtResource("3_5nv8g")
+region_rect = Rect2(0, 96, 96, 96)
+
+[node name="HookedSoldier" type="Sprite2D" parent="Abducter/Line2D/Hook"]
+visible = false
+material = SubResource("ShaderMaterial_pacgh")
+position = Vector2(0, 35)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_essvy")
+
+[node name="HookGrab" type="Marker2D" parent="Abducter/Line2D/Hook"]
+position = Vector2(3.59097, 28.3152)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_s0pw2")

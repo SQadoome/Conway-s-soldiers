@@ -1,0 +1,130 @@
+[gd_scene load_steps=18 format=3 uid="uid://sth1qe1mg21o"]
+
+[ext_resource type="Script" uid="uid://d1ejud07m5si2" path="res://Objects/Soldiers/ascend_portal.gd" id="1_aqbdl"]
+[ext_resource type="Shader" uid="uid://bl7h2styhocyl" path="res://Assets/dissolve.gdshader" id="6_a3rkg"]
+[ext_resource type="Texture2D" uid="uid://b0vphxtx7i1qo" path="res://Assets/Sprites/portal_1.png" id="7_pxjfn"]
+[ext_resource type="Texture2D" uid="uid://bbdl201aj0b71" path="res://Assets/Sprites/portal_1_shadow.png" id="8_jfrgh"]
+[ext_resource type="Texture2D" uid="uid://cgw477d35104w" path="res://Assets/Sprites/portal_1_glow.png" id="9_62ad5"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7mm0l"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_sjcpe"]
+noise = SubResource("FastNoiseLite_7mm0l")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_npb37"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_806hl"]
+noise = SubResource("FastNoiseLite_npb37")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dgfk3"]
+resource_local_to_scene = true
+shader = ExtResource("6_a3rkg")
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_806hl")
+shader_parameter/percentage = 0.0
+shader_parameter/burn_texture = SubResource("NoiseTexture2D_sjcpe")
+shader_parameter/layer_1 = Color(0.89, 0.6, 1, 1)
+shader_parameter/size_1 = 0.05
+shader_parameter/layer_2 = Color(0.61, 0.3, 0.87, 1)
+shader_parameter/size_2 = 0.05
+shader_parameter/layer_3 = Color(0.352941, 0.0941176, 0.603922, 1)
+shader_parameter/size_3 = 0.05
+
+[sub_resource type="Animation" id="Animation_dgfk3"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_bh10d"]
+resource_name = "rotate"
+length = 20.0
+step = 0.1
+
+[sub_resource type="Animation" id="Animation_etj5n"]
+resource_name = "retreat_finish"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Portal/Shadow:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_etj5n"]
+_data = {
+&"RESET": SubResource("Animation_dgfk3"),
+&"drop": SubResource("Animation_bh10d"),
+&"retreat_finish": SubResource("Animation_etj5n")
+}
+
+[sub_resource type="Animation" id="Animation_hcfl5"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_yvsdf"]
+resource_name = "shake"
+length = 0.3
+step = 0.1
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dgfk3"]
+_data = {
+&"RESET": SubResource("Animation_hcfl5"),
+&"shake": SubResource("Animation_yvsdf")
+}
+
+[node name="AscendPortal" type="Node2D"]
+script = ExtResource("1_aqbdl")
+
+[node name="Portal" type="Node2D" parent="."]
+
+[node name="Body" type="Sprite2D" parent="Portal"]
+material = SubResource("ShaderMaterial_dgfk3")
+texture = ExtResource("7_pxjfn")
+
+[node name="Glow" type="Sprite2D" parent="Portal"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(13, -3)
+texture = ExtResource("9_62ad5")
+
+[node name="Hooks" type="Node2D" parent="Portal"]
+
+[node name="Shadow" type="Sprite2D" parent="Portal"]
+visible = false
+position = Vector2(-4, 2)
+texture = ExtResource("8_jfrgh")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Portal"]
+position = Vector2(-1, 6)
+amount = 5
+lifetime = 6.0
+emission_shape = 3
+emission_rect_extents = Vector2(96, 96)
+spread = 90.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 5.0
+scale_amount_min = 3.0
+scale_amount_max = 5.0
+color = Color(0.866667, 0, 1, 1)
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="Portal"]
+position = Vector2(-1, 6)
+lifetime = 3.0
+emission_shape = 3
+emission_rect_extents = Vector2(96, 96)
+spread = 90.0
+gravity = Vector2(0, 0)
+color = Color(0.866667, 0, 1, 1)
+
+[node name="Animator" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_etj5n")
+}
+
+[node name="Shaker" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_dgfk3")
+}
+
+[node name="Streamer1" type="AudioStreamPlayer2D" parent="."]

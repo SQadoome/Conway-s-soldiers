@@ -1,0 +1,233 @@
+[gd_scene load_steps=13 format=3 uid="uid://c3uuyalcchtyw"]
+
+[ext_resource type="Script" uid="uid://c76qfmcsriyis" path="res://Objects/GUI/creator_gui.gd" id="1_fjqv3"]
+[ext_resource type="Texture2D" uid="uid://d0e5vud05hnw6" path="res://Assets/Sprites/Soldier.png" id="2_18fah"]
+[ext_resource type="Script" uid="uid://cblxwc1holu35" path="res://Objects/GUI/object_menu.gd" id="2_s4d41"]
+[ext_resource type="Texture2D" uid="uid://wx3k7kag0uas" path="res://Assets/Sprites/ascend_tile.png" id="3_nwii1"]
+[ext_resource type="PackedScene" uid="uid://c2yf7y3ixg1de" path="res://Objects/GUI/menu_object.tscn" id="3_qcv47"]
+[ext_resource type="Texture2D" uid="uid://56y4dj3lru5u" path="res://Assets/Graphics/gui/object_menu_arrow.png" id="3_sioeh"]
+[ext_resource type="Texture2D" uid="uid://bwsj8yjpjulaw" path="res://Assets/Graphics/gui/object_menu_bar.png" id="4_qv66a"]
+[ext_resource type="Script" uid="uid://u4ghurapyjxu" path="res://Objects/GUI/object_menu_shower.gd" id="6_e5mo1"]
+[ext_resource type="Texture2D" uid="uid://c4xiqnxtgwjxu" path="res://Assets/Graphics/gui/buttons/settings_button_normal.png" id="7_ln275"]
+[ext_resource type="Texture2D" uid="uid://bv5xq8tw04eoh" path="res://Assets/Graphics/gui/buttons/settings_button_pressed.png" id="8_sioeh"]
+[ext_resource type="Texture2D" uid="uid://g07evqa6e4o5" path="res://Assets/Graphics/gui/buttons/settings_button_hover.png" id="9_qv66a"]
+[ext_resource type="Script" uid="uid://cg78lr741qjdh" path="res://Objects/GUI/item_list.gd" id="12_ebke4"]
+
+[node name="CreatorGUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_fjqv3")
+
+[node name="ObjectMenu" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -160.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+script = ExtResource("2_s4d41")
+
+[node name="Arrow" type="TextureRect" parent="ObjectMenu"]
+layout_mode = 0
+offset_left = 1608.0
+offset_top = -101.0
+offset_right = 1908.0
+offset_bottom = -5.0
+texture = ExtResource("3_sioeh")
+script = ExtResource("6_e5mo1")
+
+[node name="Bar" type="TextureRect" parent="ObjectMenu"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -960.0
+offset_top = -216.0
+offset_right = 960.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("4_qv66a")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ObjectMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 28.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Object1" parent="ObjectMenu/HBoxContainer" instance=ExtResource("3_qcv47")]
+layout_mode = 2
+sprite = ExtResource("2_18fah")
+object_name = "soldier"
+
+[node name="Object2" parent="ObjectMenu/HBoxContainer" instance=ExtResource("3_qcv47")]
+layout_mode = 2
+sprite = ExtResource("3_nwii1")
+object_name = "ascension"
+
+[node name="Menu" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Button" type="TextureButton" parent="Menu"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 7.0
+offset_right = 73.0
+offset_bottom = 71.0
+texture_normal = ExtResource("7_ln275")
+texture_pressed = ExtResource("8_sioeh")
+texture_hover = ExtResource("9_qv66a")
+
+[node name="Insides" type="Control" parent="Menu"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Panel2" type="Panel" parent="Menu/Insides"]
+modulate = Color(1, 1, 1, 0.576471)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Buttons" type="Control" parent="Menu/Insides"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -395.0
+offset_top = -331.5
+offset_right = 395.0
+offset_bottom = 331.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Menu/Insides/Buttons"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/Insides/Buttons"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Settings" type="Button" parent="Menu/Insides/Buttons/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+text = "Settings"
+
+[node name="Save" type="Button" parent="Menu/Insides/Buttons/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+text = "Save"
+
+[node name="SaveAndQuit" type="Button" parent="Menu/Insides/Buttons/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+text = "Save and quit"
+
+[node name="Quit" type="Button" parent="Menu/Insides/Buttons/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+text = "quit"
+
+[node name="ExitMenu" type="Button" parent="Menu/Insides/Buttons"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1.0
+offset_top = -34.0
+offset_right = 36.0
+offset_bottom = 1.0
+grow_horizontal = 0
+text = "X"
+
+[node name="ItemList" type="ItemList" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -92.0
+offset_bottom = 34.0
+grow_horizontal = 0
+item_count = 2
+item_0/text = "Finite"
+item_1/text = "Infinite"
+script = ExtResource("12_ebke4")
+
+[node name="Line" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -36.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="CheckBox" type="CheckBox" parent="Line"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Line"
+
+[node name="SaveButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 439.0
+offset_top = 4.0
+offset_right = 482.0
+offset_bottom = 35.0
+text = "save"
+
+[connection signal="item_selected" from="ItemList" to="." method="_on_item_list_item_selected"]

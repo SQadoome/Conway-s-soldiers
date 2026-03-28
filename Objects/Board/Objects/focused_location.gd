@@ -1,0 +1,2 @@
+class_name FocusedLocation
+extends Sprite2D

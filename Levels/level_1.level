@@ -1,0 +1,7 @@
+{
+	"board": "Infinite",
+	"objects": {
+		"(-5, -5)": "ascension",
+		"(-4, -6)": "ascension"
+	}
+}

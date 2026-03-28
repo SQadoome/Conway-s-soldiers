@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://bc4t8sh2p3q8k"]
+
+[ext_resource type="Texture2D" uid="uid://kojb41pl42ua" path="res://Assets/Sprites/limit.png" id="1_eljh5"]
+
+[node name="Limit" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(40, -1)
+texture = ExtResource("1_eljh5")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -1297.0
+offset_top = -698.0
+offset_right = 1281.0
+offset_bottom = -58.0
+mouse_filter = 2
+mouse_force_pass_scroll_events = false
+color = Color(0, 0, 0, 1)

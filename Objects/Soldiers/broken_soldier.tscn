@@ -1,0 +1,64 @@
+[gd_scene load_steps=3 format=3 uid="uid://kl4viiyhxi61"]
+
+[ext_resource type="Script" uid="uid://bb677cc22yce6" path="res://Objects/Soldiers/broken_soldier.gd" id="1_j0uor"]
+[ext_resource type="Texture2D" uid="uid://c1crysuhtagia" path="res://Assets/Sprites/broken_soldier.png" id="2_t4r6e"]
+
+[node name="BrokenSoldier" type="Node2D"]
+script = ExtResource("1_j0uor")
+
+[node name="Pieces" type="Node2D" parent="."]
+scale = Vector2(0.5, 0.5)
+
+[node name="Sprite2D" type="Sprite2D" parent="Pieces"]
+position = Vector2(3, 53)
+texture = ExtResource("2_t4r6e")
+region_enabled = true
+region_rect = Rect2(135.033, -1.5, 67.4672, 36)
+
+[node name="Sprite2D2" type="Sprite2D" parent="Pieces"]
+position = Vector2(-41, 23)
+texture = ExtResource("2_t4r6e")
+region_enabled = true
+region_rect = Rect2(199.99, -0.885414, 47.5838, 81.6388)
+
+[node name="Sprite2D3" type="Sprite2D" parent="Pieces"]
+position = Vector2(-55, -12)
+texture = ExtResource("2_t4r6e")
+region_enabled = true
+region_rect = Rect2(254.036, 1.77487, 27.0836, 71.6919)
+
+[node name="Sprite2D4" type="Sprite2D" parent="Pieces"]
+position = Vector2(-15, -30)
+texture = ExtResource("2_t4r6e")
+region_enabled = true
+region_rect = Rect2(293.117, -0.346679, 47.7946, 55.1231)
+
+[node name="Sprite2D5" type="Sprite2D" parent="Pieces"]
+position = Vector2(-19, -43)
+texture = ExtResource("2_t4r6e")
+region_enabled = true
+region_rect = Rect2(344.735, -0.983941, 54.1672, 59.9026)
+
+[node name="Sprite2D6" type="Sprite2D" parent="Pieces"]
+position = Vector2(43, -34)
+texture = ExtResource("2_t4r6e")
+region_enabled = true
+region_rect = Rect2(410.843, -0.506332, 50.8027, 58.5)
+
+[node name="Sprite2D7" type="Sprite2D" parent="Pieces"]
+position = Vector2(19, -13)
+texture = ExtResource("2_t4r6e")
+region_enabled = true
+region_rect = Rect2(473.96, -1.53234, 83.6448, 119.566)
+
+[node name="Sprite2D8" type="Sprite2D" parent="Pieces"]
+position = Vector2(53, 23)
+texture = ExtResource("2_t4r6e")
+region_enabled = true
+region_rect = Rect2(563.765, 0.00951004, 38.4869, 72.3553)
+
+[node name="Sprite2D9" type="Sprite2D" parent="Pieces"]
+position = Vector2(4, 31)
+texture = ExtResource("2_t4r6e")
+region_enabled = true
+region_rect = Rect2(600.195, 0.00761032, 73.8948, 89.2895)

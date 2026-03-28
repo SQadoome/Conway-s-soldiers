@@ -1,0 +1,8 @@
+res://Objects/Effects/tfryu.gdshader
+res://Objects/Effects/rgb.gdshader
+res://Objects/Soldiers/soldier.gdshader
+res://Objects/GUI/level_selector.tres
+res://Objects/Board/Creator/board_object_data.gd
+res://Objects/Soldiers/out_line.gdshader
+res://Assets/dissolve.gdshader
+res://Objects/Effects/cv.gdshader

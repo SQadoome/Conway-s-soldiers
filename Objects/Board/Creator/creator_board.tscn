@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://658do20gcj7"]
+
+[ext_resource type="Script" uid="uid://vg3r2dksjq1j" path="res://Objects/Board/Creator/creator_board.gd" id="1_gohk1"]
+[ext_resource type="Texture2D" uid="uid://co15asjl5dnf0" path="res://Assets/Sprites/stuff.png" id="3_jkvt6"]
+[ext_resource type="Script" uid="uid://e6fhl6wg56ox" path="res://Objects/Board/smart_camera.gd" id="3_jmccm"]
+[ext_resource type="PackedScene" uid="uid://c3uuyalcchtyw" path="res://Objects/GUI/creator_gui.tscn" id="4_d73fl"]
+[ext_resource type="Script" uid="uid://whreqvaxh3gq" path="res://Objects/Core/music_player.gd" id="4_l4i3y"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_feo6v"]
+texture = ExtResource("3_jkvt6")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+1:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_ygwjm"]
+tile_size = Vector2i(128, 128)
+sources/0 = SubResource("TileSetAtlasSource_feo6v")
+
+[node name="CreatorBoard" type="Node2D" node_paths=PackedStringArray("OBJECTS", "CAMERA")]
+script = ExtResource("1_gohk1")
+OBJECTS = NodePath("Objects")
+CAMERA = NodePath("SmartCamera")
+
+[node name="SmartCamera" type="Camera2D" parent="."]
+script = ExtResource("3_jmccm")
+metadata/_custom_type_script = "uid://e6fhl6wg56ox"
+
+[node name="Objects" type="TileMapLayer" parent="."]
+position = Vector2(-32, -32)
+scale = Vector2(0.5, 0.5)
+tile_set = SubResource("TileSet_ygwjm")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CreatorGUI" parent="CanvasLayer" instance=ExtResource("4_d73fl")]
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+script = ExtResource("4_l4i3y")
+metadata/_custom_type_script = "uid://whreqvaxh3gq"

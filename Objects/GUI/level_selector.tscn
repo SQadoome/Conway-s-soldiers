@@ -1,0 +1,936 @@
+[gd_scene load_steps=13 format=3 uid="uid://0mdxwbimb8gw"]
+
+[ext_resource type="Theme" uid="uid://bb4a68385gjaj" path="res://Objects/GUI/level_selector.tres" id="1_8fmcl"]
+[ext_resource type="Script" uid="uid://b2wjat7afsdsn" path="res://Objects/GUI/level_selector.gd" id="1_fjaol"]
+[ext_resource type="Texture2D" uid="uid://dwr5nylqjrgn1" path="res://Assets/Sprites/bg.png" id="2_uggc4"]
+[ext_resource type="Texture2D" uid="uid://csr8et1ccxbk7" path="res://Assets/Sprites/ascend.png" id="3_78dt4"]
+[ext_resource type="Texture2D" uid="uid://bh4avon30tat8" path="res://Levels/Main/classic_1.png" id="3_586fx"]
+[ext_resource type="Texture2D" uid="uid://dllrtgqedk8vm" path="res://Assets/Sprites/classic.png" id="4_586fx"]
+[ext_resource type="Texture2D" uid="uid://bw518p0sl3tst" path="res://Assets/Sprites/bones.png" id="6_38aor"]
+[ext_resource type="Texture2D" uid="uid://dmn62arn4bku1" path="res://Assets/Sprites/classic_diagonals.png" id="6_pftvc"]
+[ext_resource type="Texture2D" uid="uid://cykaclsho7eje" path="res://Assets/Sprites/standard.png" id="7_8fmcl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7l5hn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8fmcl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pftvc"]
+
+[node name="LevelSelector" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_8fmcl")
+script = ExtResource("1_fjaol")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("2_uggc4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Margin2" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="Normals" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Margin2" type="Control" parent="VBoxContainer/Normals"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Slot1" type="Control" parent="VBoxContainer/Normals"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Panel" type="Panel" parent="VBoxContainer/Normals/Slot1"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.003
+anchor_bottom = 1.107
+offset_right = 0.169983
+offset_bottom = 0.138
+theme_override_styles/panel = SubResource("StyleBoxFlat_7l5hn")
+
+[node name="Button" type="Button" parent="VBoxContainer/Normals/Slot1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_8fmcl")
+
+[node name="Level" type="TextureRect" parent="VBoxContainer/Normals/Slot1"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.034
+anchor_top = 0.05
+anchor_right = 0.97
+anchor_bottom = 0.944
+offset_left = -6.74
+offset_top = -6.45
+offset_right = 1.29999
+offset_bottom = 6.90396
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_586fx")
+expand_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Normals/Slot1"]
+texture_filter = 1
+layout_mode = 2
+anchor_left = 0.911
+anchor_top = 1.06
+anchor_right = 0.911
+anchor_bottom = 1.06
+offset_left = -21.71
+offset_top = -26.04
+offset_right = 22.29
+offset_bottom = 15.96
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+texture = ExtResource("3_78dt4")
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/Normals/Slot1"]
+texture_filter = 1
+layout_mode = 2
+anchor_left = 0.82
+anchor_top = 1.06
+anchor_right = 0.82
+anchor_bottom = 1.06
+offset_left = -22.2
+offset_top = -26.04
+offset_right = 21.8
+offset_bottom = 15.96
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+texture = ExtResource("4_586fx")
+
+[node name="TextureRect3" type="TextureRect" parent="VBoxContainer/Normals/Slot1"]
+texture_filter = 1
+layout_mode = 2
+anchor_left = 0.733
+anchor_top = 1.048
+anchor_right = 0.733
+anchor_bottom = 1.048
+offset_left = -22.13
+offset_top = -20.864
+offset_right = 21.87
+offset_bottom = 21.136
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+texture = ExtResource("6_pftvc")
+
+[node name="TextureRect4" type="TextureRect" parent="VBoxContainer/Normals/Slot1"]
+texture_filter = 1
+layout_mode = 2
+anchor_left = 0.644
+anchor_top = 1.048
+anchor_right = 0.644
+anchor_bottom = 1.048
+offset_left = -21.84
+offset_top = -20.864
+offset_right = 22.16
+offset_bottom = 21.136
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+texture = ExtResource("6_pftvc")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/Normals/Slot1"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.01
+anchor_top = 1.0
+anchor_right = 0.749
+anchor_bottom = 1.107
+offset_left = -0.0999999
+offset_top = -2.0
+offset_right = 14.893
+offset_bottom = 17.842
+grow_horizontal = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 32
+text = "TITLE"
+
+[node name="Margin3" type="Control" parent="VBoxContainer/Normals"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Slot2" type="Control" parent="VBoxContainer/Normals"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Panel" type="Panel" parent="VBoxContainer/Normals/Slot2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.003
+anchor_bottom = 1.107
+offset_right = 0.169983
+offset_bottom = 0.138
+theme_override_styles/panel = SubResource("StyleBoxFlat_7l5hn")
+
+[node name="Button" type="Button" parent="VBoxContainer/Normals/Slot2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_8fmcl")
+
+[node name="Level" type="TextureRect" parent="VBoxContainer/Normals/Slot2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.034
+anchor_top = 0.05
+anchor_right = 0.97
+anchor_bottom = 0.944
+offset_left = -6.74001
+offset_top = -6.45
+offset_right = 1.29999
+offset_bottom = 6.90396
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_586fx")
+expand_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Normals/Slot2"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.911
+anchor_top = 1.06
+anchor_right = 0.911
+anchor_bottom = 1.06
+offset_left = -21.71
+offset_top = -26.04
+offset_right = 22.29
+offset_bottom = 15.96
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+texture = ExtResource("3_78dt4")
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/Normals/Slot2"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.82
+anchor_top = 1.06
+anchor_right = 0.82
+anchor_bottom = 1.06
+offset_left = -22.2001
+offset_top = -26.04
+offset_right = 21.7999
+offset_bottom = 15.96
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+texture = ExtResource("4_586fx")
+
+[node name="TextureRect3" type="TextureRect" parent="VBoxContainer/Normals/Slot2"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.733
+anchor_top = 1.048
+anchor_right = 0.733
+anchor_bottom = 1.048
+offset_left = -22.0431
+offset_top = -20.864
+offset_right = 21.9569
+offset_bottom = 21.136
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+texture = ExtResource("6_pftvc")
+
+[node name="TextureRect4" type="TextureRect" parent="VBoxContainer/Normals/Slot2"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.645
+anchor_top = 1.048
+anchor_right = 0.645
+anchor_bottom = 1.048
+offset_left = -22.2751
+offset_top = -20.864
+offset_right = 21.7249
+offset_bottom = 21.136
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+texture = ExtResource("7_8fmcl")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/Normals/Slot2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.01
+anchor_top = 1.0
+anchor_right = 0.749
+anchor_bottom = 1.107
+offset_left = -0.0999999
+offset_top = -2.0
+offset_right = 14.893
+offset_bottom = 17.842
+grow_horizontal = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 32
+text = "TITLE"
+
+[node name="Margin4" type="Control" parent="VBoxContainer/Normals"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Slot3" type="Control" parent="VBoxContainer/Normals"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Panel" type="Panel" parent="VBoxContainer/Normals/Slot3"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.003
+anchor_bottom = 1.107
+offset_right = 0.169983
+offset_bottom = 0.138
+theme_override_styles/panel = SubResource("StyleBoxFlat_7l5hn")
+
+[node name="Button" type="Button" parent="VBoxContainer/Normals/Slot3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_8fmcl")
+
+[node name="Level" type="TextureRect" parent="VBoxContainer/Normals/Slot3"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.034
+anchor_top = 0.05
+anchor_right = 0.97
+anchor_bottom = 0.944
+offset_left = -6.73994
+offset_top = -6.45
+offset_right = 1.30005
+offset_bottom = 6.90396
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_586fx")
+expand_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Normals/Slot3"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.911
+anchor_top = 1.06
+anchor_right = 0.911
+anchor_bottom = 1.06
+offset_left = -21.71
+offset_top = -26.04
+offset_right = 22.29
+offset_bottom = 15.96
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+texture = ExtResource("3_78dt4")
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/Normals/Slot3"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.82
+anchor_top = 1.06
+anchor_right = 0.82
+anchor_bottom = 1.06
+offset_left = -22.2001
+offset_top = -26.04
+offset_right = 21.7999
+offset_bottom = 15.96
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+texture = ExtResource("4_586fx")
+
+[node name="TextureRect3" type="TextureRect" parent="VBoxContainer/Normals/Slot3"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.733
+anchor_top = 1.048
+anchor_right = 0.733
+anchor_bottom = 1.048
+offset_left = -22.0431
+offset_top = -20.864
+offset_right = 21.9569
+offset_bottom = 21.136
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+texture = ExtResource("6_pftvc")
+
+[node name="TextureRect4" type="TextureRect" parent="VBoxContainer/Normals/Slot3"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.645
+anchor_top = 1.048
+anchor_right = 0.645
+anchor_bottom = 1.048
+offset_left = -22.2751
+offset_top = -20.864
+offset_right = 21.7249
+offset_bottom = 21.136
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+texture = ExtResource("6_pftvc")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/Normals/Slot3"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.01
+anchor_top = 1.0
+anchor_right = 0.749
+anchor_bottom = 1.107
+offset_left = -0.0999999
+offset_top = -2.0
+offset_right = 14.893
+offset_bottom = 17.842
+grow_horizontal = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 32
+text = "TITLE"
+
+[node name="Margin" type="Control" parent="VBoxContainer/Normals"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Margin3" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 2
+
+[node name="Challenges" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Margin2" type="Control" parent="VBoxContainer/Challenges"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Slot1" type="Control" parent="VBoxContainer/Challenges"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Panel" type="Panel" parent="VBoxContainer/Challenges/Slot1"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.003
+anchor_bottom = 1.107
+offset_right = 0.169983
+offset_bottom = 0.138
+theme_override_styles/panel = SubResource("StyleBoxFlat_7l5hn")
+
+[node name="Button" type="Button" parent="VBoxContainer/Challenges/Slot1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_8fmcl")
+
+[node name="Level" type="TextureRect" parent="VBoxContainer/Challenges/Slot1"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.034
+anchor_top = 0.05
+anchor_right = 0.97
+anchor_bottom = 0.944
+offset_left = -6.74
+offset_top = -6.45001
+offset_right = 1.29999
+offset_bottom = 6.90396
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_586fx")
+expand_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Challenges/Slot1"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.911
+anchor_top = 1.06
+anchor_right = 0.911
+anchor_bottom = 1.06
+offset_left = -21.71
+offset_top = -24.04
+offset_right = 22.29
+offset_bottom = 17.96
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+texture = ExtResource("3_78dt4")
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/Challenges/Slot1"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.82
+anchor_top = 1.06
+anchor_right = 0.82
+anchor_bottom = 1.06
+offset_left = -22.2001
+offset_top = -24.04
+offset_right = 21.7999
+offset_bottom = 17.96
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+texture = ExtResource("4_586fx")
+
+[node name="TextureRect3" type="TextureRect" parent="VBoxContainer/Challenges/Slot1"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.729
+anchor_top = 1.053
+anchor_right = 0.729
+anchor_bottom = 1.053
+offset_left = -21.877
+offset_top = -20.882
+offset_right = 22.123
+offset_bottom = 21.118
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+texture = ExtResource("6_pftvc")
+
+[node name="TextureRect4" type="TextureRect" parent="VBoxContainer/Challenges/Slot1"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.639
+anchor_top = 1.053
+anchor_right = 0.639
+anchor_bottom = 1.053
+offset_left = -21.707
+offset_top = -20.882
+offset_right = 22.293
+offset_bottom = 21.118
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+texture = ExtResource("7_8fmcl")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/Challenges/Slot1"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.01
+anchor_top = 1.0
+anchor_right = 0.749
+anchor_bottom = 1.107
+offset_left = -0.0999999
+offset_top = -2.0
+offset_right = 14.893
+offset_bottom = 17.842
+grow_horizontal = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 32
+text = "TITLE"
+
+[node name="Difficulty" type="TextureRect" parent="VBoxContainer/Challenges/Slot1"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.39
+anchor_top = -0.147
+anchor_right = 0.581
+anchor_bottom = 0.124
+offset_left = -0.0700073
+offset_top = -0.0820007
+offset_right = -0.153015
+offset_bottom = 0.143997
+texture = ExtResource("6_38aor")
+
+[node name="Margin3" type="Control" parent="VBoxContainer/Challenges"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Slot2" type="Control" parent="VBoxContainer/Challenges"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Panel" type="Panel" parent="VBoxContainer/Challenges/Slot2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.003
+anchor_bottom = 1.107
+offset_right = 0.169983
+offset_bottom = 0.138
+theme_override_styles/panel = SubResource("StyleBoxFlat_7l5hn")
+
+[node name="Button" type="Button" parent="VBoxContainer/Challenges/Slot2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_8fmcl")
+
+[node name="Level" type="TextureRect" parent="VBoxContainer/Challenges/Slot2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.034
+anchor_top = 0.05
+anchor_right = 0.97
+anchor_bottom = 0.944
+offset_left = -6.74001
+offset_top = -6.45001
+offset_right = 1.29999
+offset_bottom = 6.90396
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_586fx")
+expand_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Challenges/Slot2"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.911
+anchor_top = 1.06
+anchor_right = 0.911
+anchor_bottom = 1.06
+offset_left = -21.71
+offset_top = -24.04
+offset_right = 22.29
+offset_bottom = 17.96
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+texture = ExtResource("3_78dt4")
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/Challenges/Slot2"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.82
+anchor_top = 1.06
+anchor_right = 0.82
+anchor_bottom = 1.06
+offset_left = -22.2001
+offset_top = -24.04
+offset_right = 21.7999
+offset_bottom = 17.96
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+texture = ExtResource("4_586fx")
+
+[node name="TextureRect3" type="TextureRect" parent="VBoxContainer/Challenges/Slot2"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.729
+anchor_top = 1.053
+anchor_right = 0.729
+anchor_bottom = 1.053
+offset_left = -21.877
+offset_top = -20.882
+offset_right = 22.123
+offset_bottom = 21.118
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+texture = ExtResource("6_pftvc")
+
+[node name="TextureRect4" type="TextureRect" parent="VBoxContainer/Challenges/Slot2"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.639
+anchor_top = 1.053
+anchor_right = 0.639
+anchor_bottom = 1.053
+offset_left = -21.707
+offset_top = -20.882
+offset_right = 22.293
+offset_bottom = 21.118
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+texture = ExtResource("6_pftvc")
+
+[node name="Difficulty" type="TextureRect" parent="VBoxContainer/Challenges/Slot2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.39
+anchor_top = -0.147
+anchor_right = 0.581
+anchor_bottom = 0.124
+offset_left = -0.0700073
+offset_top = -0.0820007
+offset_right = -0.153015
+offset_bottom = 0.143997
+texture = ExtResource("6_38aor")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/Challenges/Slot2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.01
+anchor_top = 1.0
+anchor_right = 0.749
+anchor_bottom = 1.107
+offset_left = -0.0999999
+offset_top = -2.0
+offset_right = 14.893
+offset_bottom = 17.842
+grow_horizontal = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 32
+text = "TITLE"
+
+[node name="Margin4" type="Control" parent="VBoxContainer/Challenges"]
+custom_minimum_size = Vector2(8, 0)
+layout_mode = 2
+
+[node name="Slot3" type="Control" parent="VBoxContainer/Challenges"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Panel" type="Panel" parent="VBoxContainer/Challenges/Slot3"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.003
+anchor_bottom = 1.107
+offset_right = 0.169983
+offset_bottom = 0.138
+theme_override_styles/panel = SubResource("StyleBoxFlat_7l5hn")
+
+[node name="Button" type="Button" parent="VBoxContainer/Challenges/Slot3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_pftvc")
+
+[node name="Level" type="TextureRect" parent="VBoxContainer/Challenges/Slot3"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.034
+anchor_top = 0.05
+anchor_right = 0.97
+anchor_bottom = 0.944
+offset_left = -6.73995
+offset_top = -6.45001
+offset_right = 1.30005
+offset_bottom = 6.90396
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_586fx")
+expand_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Challenges/Slot3"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.911
+anchor_top = 1.06
+anchor_right = 0.911
+anchor_bottom = 1.06
+offset_left = -21.71
+offset_top = -23.04
+offset_right = 22.29
+offset_bottom = 18.96
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+texture = ExtResource("3_78dt4")
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/Challenges/Slot3"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.82
+anchor_top = 1.06
+anchor_right = 0.82
+anchor_bottom = 1.06
+offset_left = -22.2001
+offset_top = -23.04
+offset_right = 21.7999
+offset_bottom = 18.96
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+texture = ExtResource("4_586fx")
+
+[node name="TextureRect3" type="TextureRect" parent="VBoxContainer/Challenges/Slot3"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.729
+anchor_top = 1.056
+anchor_right = 0.729
+anchor_bottom = 1.056
+offset_left = -21.877
+offset_top = -21.064
+offset_right = 22.123
+offset_bottom = 20.936
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+texture = ExtResource("6_pftvc")
+
+[node name="TextureRect4" type="TextureRect" parent="VBoxContainer/Challenges/Slot3"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.639
+anchor_top = 1.056
+anchor_right = 0.639
+anchor_bottom = 1.056
+offset_left = -21.707
+offset_top = -21.064
+offset_right = 22.293
+offset_bottom = 20.936
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+texture = ExtResource("6_pftvc")
+
+[node name="Difficulty" type="TextureRect" parent="VBoxContainer/Challenges/Slot3"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.39
+anchor_top = -0.147
+anchor_right = 0.581
+anchor_bottom = 0.124
+offset_left = -0.0700073
+offset_top = -0.0820007
+offset_right = -0.153015
+offset_bottom = 0.143997
+texture = ExtResource("6_38aor")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/Challenges/Slot3"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.01
+anchor_top = 1.0
+anchor_right = 0.749
+anchor_bottom = 1.107
+offset_left = -0.0999999
+offset_top = -2.0
+offset_right = 14.893
+offset_bottom = 17.842
+grow_horizontal = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 32
+text = "TITLE"
+
+[node name="Margin" type="Control" parent="VBoxContainer/Challenges"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Margin4" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+
+[node name="Margin2" type="Control" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "<--"
+
+[node name="Control" type="Control" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(690, 0)
+layout_mode = 2
+
+[node name="Button3" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "Back"
+
+[node name="Control2" type="Control" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(690, 0)
+layout_mode = 2
+
+[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "-->"
+
+[node name="Margin" type="Control" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Margin" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[connection signal="pressed" from="VBoxContainer/Normals/Slot1/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Challenges/Slot1/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Button3" to="." method="_on_button_3_pressed"]

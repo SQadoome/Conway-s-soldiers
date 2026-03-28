@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqiw5b8w4tddt"]
+
+[ext_resource type="PackedScene" uid="uid://ldm0fck332os" path="res://Scenes/CoreScenes/ingame_board.tscn" id="1_inrh2"]
+[ext_resource type="Script" uid="uid://e6fhl6wg56ox" path="res://classes/smart_camera.gd" id="2_5s1dx"]
+
+[node name="LevelCreator" type="Node2D"]
+
+[node name="BoardManager" parent="." node_paths=PackedStringArray("CAMERA") instance=ExtResource("1_inrh2")]
+CAMERA = NodePath("../SmartCamera")
+
+[node name="SmartCamera" type="Camera2D" parent="."]
+script = ExtResource("2_5s1dx")
+metadata/_custom_type_script = "uid://e6fhl6wg56ox"

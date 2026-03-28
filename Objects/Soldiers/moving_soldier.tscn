@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://d4ncma7rxncx2"]
+
+[ext_resource type="Script" uid="uid://dacojj2rdp4j8" path="res://Objects/Soldiers/moving_soldier.gd" id="1_8xhkx"]
+[ext_resource type="Texture2D" uid="uid://d0e5vud05hnw6" path="res://Assets/Sprites/Soldier.png" id="2_8xhkx"]
+[ext_resource type="Shader" uid="uid://bkq8rks1krgdh" path="res://Objects/Soldiers/soldier.gdshader" id="2_sy7ir"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8xhkx"]
+shader = ExtResource("2_sy7ir")
+shader_parameter/influence = 0.0
+
+[sub_resource type="Gradient" id="Gradient_8ixlc"]
+offsets = PackedFloat32Array(0, 0.14, 0.306667, 0.493333, 0.666667, 0.833333, 1)
+colors = PackedColorArray(1, 0, 0, 1, 0, 0.316667, 1, 1, 0.166667, 1, 0, 1, 1, 0.8, 0, 1, 0.3, 0, 1, 1, 1, 0, 0.95, 1, 1, 0, 0, 1)
+
+[node name="MovingSoldier" type="Node2D"]
+script = ExtResource("1_8xhkx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_8xhkx")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_8xhkx")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 1
+lifetime = 5.0
+fixed_fps = 60
+local_coords = true
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+color_ramp = SubResource("Gradient_8ixlc")

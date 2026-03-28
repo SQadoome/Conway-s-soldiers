@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=3 uid="uid://cepsy81kbnd2g"]
+
+[ext_resource type="Script" uid="uid://c3t8nxovfvc5a" path="res://Objects/GUI/ui.gd" id="1_xn2pn"]
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_xn2pn")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.028
+anchor_bottom = 0.029
+offset_right = -45.76
+offset_bottom = -23.32
+text = "Leave"
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.973
+anchor_right = 1.0
+anchor_bottom = 0.029
+offset_left = 43.8398
+offset_bottom = -23.32
+grow_horizontal = 0
+text = "Reset"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
