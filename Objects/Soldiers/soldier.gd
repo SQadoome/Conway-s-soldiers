@@ -1,14 +1,9 @@
 class_name Soldier
-extends Node2D
+extends Sprite2D
 
-static var shader: Shader = preload("res://Objects/Soldiers/soldier.gdshader")
-var moves: Array[Move] = []
+func _enter_tree() -> void:
+	material = material.duplicate()
+	set_shader_influence(0.0)
 
-func _ready() -> void:
-	SetShaderInfluence(0.0)
-
-func SetMoves(moves: Array[Move]) -> void:
-	self.moves = moves
-
-func SetShaderInfluence(new_value: float) -> void:
-	get_node("Sprite2D").material.set_shader_parameter("influence", new_value)
+func set_shader_influence(new_value: float) -> void:
+	material.set_shader_parameter("influence", new_value)

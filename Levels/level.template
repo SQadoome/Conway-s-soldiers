@@ -1,0 +1,19 @@
+{
+  "tag": "",
+  "difficulty": 0
+  "type": 0, # normal/challenge
+  "move_data": {
+    "preset": {
+        "predefined_classic"
+    },
+    "preset": {
+      "Move..." # prefably wrote as a binary stream
+      }
+    },
+  "board": {"
+    type": "finite",
+    "predefined_soldiers": (binary stream),
+  },
+}
+
+

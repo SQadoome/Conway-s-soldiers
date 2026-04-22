@@ -1,40 +1,58 @@
 class_name SmartCamera
 extends Camera2D
 
-signal camera_shifted(new_cell: Vector2i)
+signal camera_shifted(old_cell: Vector2i, new_cell: Vector2i)
+signal camera_scaled(old_zoom: Vector2, new_zoom: Vector2)
 
-var dead_zone: Vector2 = Vector2(0, 128)
-var old_cell: Vector2i = Vector2.ZERO
+var x_view: Vector2 = Vector2.ZERO
+var y_view: Vector2 = Vector2.ZERO
+var limit: Rect2 = Rect2(Vector2.ZERO, Vector2.ZERO)
 
-func vec_2_cell(pos: Vector2) -> Vector2i:
-	var cell: Vector2i
-	cell = Vector2i(
-		floori(pos.x/64),
-		floori(pos.y/64)
-	)
-	return cell
+var old_cell: Vector2i = Vector2i.ZERO
+
+const MAX_ZOOM: Vector2 = Vector2(2.1, 2.1)
+const MIN_ZOOM: Vector2 = Vector2(0.4, 0.4)
+
+func set_boundires(boundry: Rect2) -> void:
+	# boundry is good
+	
+	# boundry is to small
+	
+	pass
+
+func move_camera(event: InputEventMouseMotion) -> void:
+	position -= event.relative/zoom
+	
+	var new_cell: Vector2i = UTIL.CellurizeVector(position)
+	if new_cell != old_cell:
+		camera_shifted.emit(old_cell, new_cell)
+		old_cell = new_cell
 	
 
-func MoveTo(location: Vector2) -> void:
-	old_cell = vec_2_cell(location)
-	position = location
+func scale_camera(direction: int) -> void:
+	var new_zoom: Vector2 = zoom + Vector2(direction, direction)*0.1
+	if not new_zoom < MIN_ZOOM and not new_zoom > MAX_ZOOM:
+		zoom = new_zoom
+		print(zoom)
+	
 
-func SimulateShift(new_cell: Vector2i) -> void:
-	emit_signal("camera_shifted", new_cell)
-	position = new_cell*64
+func simulate_shift(by_cells: Vector2i) -> void:
+	assert(not by_cells == Vector2i.ZERO)
+	
+	var new_cell: Vector2i = old_cell + by_cells
+	position += Vector2(by_cells*64)
+	camera_shifted.emit(old_cell, new_cell)
 	old_cell = new_cell
+	
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		
 		if event.button_mask == MOUSE_BUTTON_MASK_MIDDLE:
-			position.x -= event.relative.x
-			
-			if position.y - event.relative.y > -12*64 - 1080:
-				position.y -= event.relative.y
-			var new_cell: Vector2i = vec_2_cell(position)
-			
-			emit_signal("camera_shifted", new_cell)
-			old_cell = new_cell
-			
-		
+			move_camera(event as InputEventMouseMotion)
+	elif event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			scale_camera(1)
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			scale_camera(-1)
+	

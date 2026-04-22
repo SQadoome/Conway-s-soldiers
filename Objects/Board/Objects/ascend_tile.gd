@@ -23,21 +23,15 @@ func _ready() -> void:
 	HOOK_TILE.hide_static_soldier.connect(func(): $Soldier.visible = false)
 	SOLDIER.material.set_shader_parameter(
 		"influence", UTIL.CellurizeVector(position).y/100.0)
-	GameEvents.ingame_board_eventer.request_check_soldier_accept.connect(
-		func(data: IngameBoardEventer.SoldierCheck):
-			if data.does_exist and data.tile == UTIL.CellurizeVector(HOOK_TILE.global_position):
-				held_soldier = true
-	)
 	
 
-func OnSoldierMove(m: IngameBoardEventer.SoldierMoved) -> void:
-	if m.destination == tile and not ascended:
+func OnSoldierMove(m: Move) -> void:
+	if m.target_location == tile and not ascended:
 		count_on = true
 		Ascend()
-		GameEvents.ingame_board_eventer.emit_signal(
-			"ascension",
+		GameEvents.ingame_board_eventer.ascension.emit(
 			IngameBoardEventer.Ascension.new(
-				m.destination,
+				m.target_location,
 				UTIL.CellurizeVector(HOOK_TILE.global_position))
 		)
 	if count_on:
@@ -54,10 +48,12 @@ func OnUndoSoldierMove(d: IngameBoardEventer.UndoSoldierMove) -> void:
 func Ascend() -> void:
 	IngameBoard.ascension_count += 1
 	var quick = IngameBoard.ascension_count >= IngameBoard.total_ascensions
-	GameEvents.ingame_board_eventer.emit_signal(
-		"request_check_soldier",
-		UTIL.CellurizeVector(HOOK_TILE.global_position)
+	
+	var soldier_exists: bool = GameEvents.ingame_board_eventer.request_data(
+		IngameBoardEventer.DATA_REQUESTS.DOES_SOLDIER_EXIST, UTIL.CellurizeVector(HOOK_TILE.global_position)
 	)
+	if soldier_exists:
+		held_soldier = true
 	
 	HOOK_TILE.HookBreakOut(quick)
 	SOLDIER.visible = true

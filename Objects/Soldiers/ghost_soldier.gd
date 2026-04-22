@@ -3,11 +3,11 @@ extends Node2D
 
 signal chosen(move: Move)
 
-var data: GhostData
+var data: Move
 var rect: Rect2
 
-func SetProperties(move: Move, is_ascending: bool = false) -> void:
-	data = GhostData.new(move, is_ascending)
+func SetProperties(move: Move) -> void:
+	data = move
 	position = move.target_location*64
 	rect = Rect2((position - Vector2(32, 32)), Vector2(64, 64))
 

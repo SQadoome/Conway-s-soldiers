@@ -4,6 +4,7 @@ extends Node2D
 @export var level_selector: LevelSelector
 var game_handler: GameHandler
 
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_screen"):
 		var current_mode = DisplayServer.window_get_mode()

@@ -1,12 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://ldm0fck332os"]
+[gd_scene load_steps=8 format=3 uid="uid://ldm0fck332os"]
 
 [ext_resource type="Script" uid="uid://dckclp5l3u0mg" path="res://Objects/Board/ingame_board.gd" id="1_yp2kk"]
+[ext_resource type="Script" uid="uid://diguoni3ywuiw" path="res://Objects/Board/Internal/infinite_internal.gd" id="2_m20tl"]
 [ext_resource type="PackedScene" uid="uid://bc4t8sh2p3q8k" path="res://Objects/Board/Objects/limit.tscn" id="3_6a368"]
 [ext_resource type="Texture2D" uid="uid://cfxj4253ty40a" path="res://Assets/Sprites/highlight.png" id="3_q6vii"]
 [ext_resource type="Texture2D" uid="uid://d0kvryta0t4am" path="res://Assets/Sprites/select.png" id="4_ogtxv"]
+[ext_resource type="Script" uid="uid://e6fhl6wg56ox" path="res://Objects/Board/smart_camera.gd" id="5_ue2yf"]
+[ext_resource type="Script" uid="uid://whreqvaxh3gq" path="res://Objects/Core/music_player.gd" id="7_pqcj4"]
 
-[node name="IngameBoard" type="Node2D"]
+[node name="IngameBoard" type="Node2D" node_paths=PackedStringArray("internal_board", "CAMERA")]
 script = ExtResource("1_yp2kk")
+internal_board = NodePath("InfiniteInternal")
+CAMERA = NodePath("SmartCamera")
+
+[node name="InfiniteInternal" type="Node2D" parent="." node_paths=PackedStringArray("camera")]
+script = ExtResource("2_m20tl")
+camera = NodePath("../SmartCamera")
+metadata/_custom_type_script = "uid://diguoni3ywuiw"
 
 [node name="Limit" parent="." instance=ExtResource("3_6a368")]
 z_index = 2
@@ -24,3 +34,11 @@ z_index = 1
 position = Vector2(-248, -395)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_ogtxv")
+
+[node name="SmartCamera" type="Camera2D" parent="."]
+script = ExtResource("5_ue2yf")
+metadata/_custom_type_script = "uid://e6fhl6wg56ox"
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+script = ExtResource("7_pqcj4")
+metadata/_custom_type_script = "uid://whreqvaxh3gq"

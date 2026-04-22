@@ -15,7 +15,7 @@ func _ready() -> void:
 			CreateBGTile(Vector2(x, y))
 	add_child(background)
 
-func ShiftBackground(new_cell: Vector2i) -> void:
+func ShiftBackground(old_cell: Vector2i, new_cell: Vector2i) -> void:
 	background.position = Vector2(new_cell*64)
 
 

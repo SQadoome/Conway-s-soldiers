@@ -4,14 +4,16 @@ extends Node2D
 var focuses: Dictionary[Vector2i, FocusedLocation] = {}
 var rules: Dictionary
 var level_data: LevelData
+@export var board: IngameBoard
 
-const BOARD: PackedScene = preload("res://Objects/Board/ingame_board.tscn")
+func _enter_tree() -> void:
+	board.level_data = level_data
+	
+
 func _ready() -> void:
 	$GUI/StartPopup.Animate()
-	var board: IngameBoard = BOARD.instantiate()
-	board.level_data = level_data
-	board.CAMERA = get_node("Camera2D")
-	$CanvasLayer.add_child(board)
+	$CanvasLayer/BoxTile._rotate(UTIL.DIRECTIONS.RIGHT)
+	$CanvasLayer/BoxTile.move(UTIL.CellurizeVector($CanvasLayer/BoxTile.position))
 	GameEvents.ingame_board_eventer.soldier_moved.connect(GeneratePopup)
 	GameEvents.ingame_board_eventer.finish.connect(
 		func():
@@ -51,8 +53,8 @@ func CreatePopup(at_cell: Vector2i, type: int) -> LevelPopup:
 	$CanvasLayer.add_child(popup)
 	return popup
 
-func GeneratePopup(m: IngameBoardEventer.SoldierMoved) -> void:
-	var at_cell: Vector2i = m.destination
+func GeneratePopup(m: Move) -> void:
+	var at_cell: Vector2i = m.target_location
 	
 	
 	if at_cell.y == -7:

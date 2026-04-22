@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://658do20gcj7"]
+[gd_scene load_steps=10 format=3 uid="uid://658do20gcj7"]
 
 [ext_resource type="Script" uid="uid://vg3r2dksjq1j" path="res://Objects/Board/Creator/creator_board.gd" id="1_gohk1"]
 [ext_resource type="Texture2D" uid="uid://co15asjl5dnf0" path="res://Assets/Sprites/stuff.png" id="3_jkvt6"]
 [ext_resource type="Script" uid="uid://e6fhl6wg56ox" path="res://Objects/Board/smart_camera.gd" id="3_jmccm"]
 [ext_resource type="PackedScene" uid="uid://c3uuyalcchtyw" path="res://Objects/GUI/creator_gui.tscn" id="4_d73fl"]
 [ext_resource type="Script" uid="uid://whreqvaxh3gq" path="res://Objects/Core/music_player.gd" id="4_l4i3y"]
+[ext_resource type="PackedScene" uid="uid://bd87celkp0mew" path="res://Objects/Board/Creator/mouse_hint.tscn" id="6_feo6v"]
+[ext_resource type="Script" uid="uid://t4bqox56yysg" path="res://rect_drawer.gd" id="7_ygwjm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_feo6v"]
 texture = ExtResource("3_jkvt6")
@@ -37,3 +39,9 @@ tile_set = SubResource("TileSet_ygwjm")
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 script = ExtResource("4_l4i3y")
 metadata/_custom_type_script = "uid://whreqvaxh3gq"
+
+[node name="MouseHint" parent="." instance=ExtResource("6_feo6v")]
+
+[node name="RectDrawer" type="Node2D" parent="."]
+script = ExtResource("7_ygwjm")
+metadata/_custom_type_script = "uid://t4bqox56yysg"
