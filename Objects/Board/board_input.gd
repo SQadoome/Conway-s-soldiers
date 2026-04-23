@@ -15,7 +15,7 @@ var is_mouse_held: bool = false
 var is_mouse_clicked: bool = false
 
 func _unhandled_input(event: InputEvent) -> void:
-	var mouse_cell: Vector2i = UTIL.CellurizeVector(get_global_mouse_position() + Vector2(32, 32))
+	var mouse_cell: Vector2i = UTIL.cellurize_vector(get_global_mouse_position() + Vector2(32, 32))
 	if event.is_action_pressed("ui_accept"):
 		anchor = mouse_cell
 		is_mouse_clicked = true
@@ -40,7 +40,7 @@ var rect: Vector2i
 var anchor: Vector2i
 var old_cell: Vector2i = Vector2i.ZERO
 func _process(delta: float) -> void:
-	var new_cell: Vector2i = UTIL.CellurizeVector(get_global_mouse_position() + Vector2(32, 32))
+	var new_cell: Vector2i = UTIL.cellurize_vector(get_global_mouse_position() + Vector2(32, 32))
 	if old_cell != new_cell and is_mouse_clicked:
 		rect = new_cell - anchor
 	if new_cell != old_cell:

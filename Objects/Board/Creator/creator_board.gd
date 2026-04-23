@@ -2,6 +2,8 @@ class_name CreatorBoard
 extends Board
 
 @export var OBJECTS: TileMapLayer
+@export var input_listener: BoardInput
+@export var line: Line
 
 var paint_object: String
 var level_data: Dictionary = {}
@@ -13,13 +15,12 @@ func _enter_tree() -> void:
 	GameEvents.creator_board_eventer.save.connect(Save)
 
 func _ready() -> void:
-	super()
 	input_listener.rect_selected.connect(func(from: Vector2i, rect: Vector2i):
 		for loc:Vector2i in BuildRect(from, rect):
 			if OBJECTS.get_cell_source_id(loc) == -1:
 				PlaceObject(paint_object, loc)
 	)
-	add_child(Line.new(CAMERA.camera_shifted))
+	
 
 var board_rect: Rect2 = Rect2()
 
@@ -109,10 +110,10 @@ func ChangeGameRule(key: String, value: Variant) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		if DoesObjectOnMouseExist():
-			RemoveObject(UTIL.CellurizeVector(get_global_mouse_position() + Vector2(32, 32)))
+			RemoveObject(UTIL.cellurize_vector(get_global_mouse_position() + Vector2(32, 32)))
 
 func DoesObjectOnMouseExist() -> bool:
-	var cell: Vector2i = UTIL.CellurizeVector(get_global_mouse_position() + Vector2(32, 32))
+	var cell: Vector2i = UTIL.cellurize_vector(get_global_mouse_position() + Vector2(32, 32))
 	var id: int = OBJECTS.get_cell_source_id(cell)
 	return (not (id == -1))
 

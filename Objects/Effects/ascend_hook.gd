@@ -16,7 +16,7 @@ func _ready() -> void:
 		hooked_soldier.scale.x = -0.5
 	hooked_soldier.material.set_shader_parameter(
 		"influence",
-		(UTIL.CellurizeVector(hooked_soldier.global_position).y + 7)/100.0
+		(UTIL.cellurize_vector(hooked_soldier.global_position).y + 7)/100.0
 	)
 	Activate()
 
@@ -36,7 +36,7 @@ func SetUp(tile: Vector2i, quick: bool = false) -> AscendHook:
 
 func Drop() -> void:
 	PlayAudio(load("res://Assets/Audio/hook_fast_pull.wav"), 0.0, 0.95)
-	var target: int = tile.y - UTIL.CellurizeVector(global_position).y
+	var target: int = tile.y - UTIL.cellurize_vector(global_position).y
 	var tween: Tween = create_tween().set_ease(Tween.EASE_IN)
 	tween.tween_property(abductor, "rotation_degrees", 25, 0.3)
 	tween.set_trans(Tween.TRANS_QUAD).tween_property(abductor, "rotation_degrees", 0, 0.7).set_delay(0.2)

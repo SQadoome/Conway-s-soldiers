@@ -61,6 +61,9 @@ signal request_soldier_move(from: Vector2i, to: Vector2i)
 signal request_place_soldier(tile: Vector2i)
 signal request_remove_soldier(tile: Vector2i)
 
+signal add_activation_detector(activation_detector: ActivationDetector)
+signal update_activation_detector(activation_detector: ActivationDetector)
+
 signal leave
 signal reset
 signal finish

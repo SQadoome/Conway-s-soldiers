@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccvb2128g84oy"]
+
+[ext_resource type="Script" uid="uid://c5cyvagnbgnui" path="res://Objects/Board/Objects/jack_in_the_box_tile.gd" id="1_67ud0"]
+[ext_resource type="Texture2D" uid="uid://wb5lv5l6ft83" path="res://Assets/Sprites/jack_in_the_box.png" id="1_w2arj"]
+
+[node name="JackInTheBoxTile" type="Node2D"]
+script = ExtResource("1_67ud0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_w2arj")

@@ -1,15 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://cyd55jeysayyw"]
+[gd_scene load_steps=4 format=3 uid="uid://cyd55jeysayyw"]
 
 [ext_resource type="Script" uid="uid://hwwnwe63rmfy" path="res://Objects/Board/Objects/box_tile.gd" id="1_k26yh"]
 [ext_resource type="Texture2D" uid="uid://s7xl2hcobbx5" path="res://Assets/Sprites/boxing.png" id="2_phtdt"]
+[ext_resource type="PackedScene" uid="uid://bsat3sbb3eemr" path="res://Objects/Board/Objects/activation_detector.tscn" id="3_p8p1k"]
 
-[node name="BoxTile" type="Node2D"]
+[node name="BoxTile" type="Node2D" node_paths=PackedStringArray("activation_detector")]
 script = ExtResource("1_k26yh")
+activation_detector = NodePath("ActivationDetector")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_phtdt")
 
-[node name="Activation" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.2)
-position = Vector2(0, 64)
+[node name="ActivationDetector" parent="." instance=ExtResource("3_p8p1k")]
 texture = ExtResource("2_phtdt")

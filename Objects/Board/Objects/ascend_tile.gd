@@ -15,14 +15,14 @@ var held_soldier: bool = false
 @onready var SOLDIER: Sprite2D = get_node("Soldier")
 
 func _ready() -> void:
-	tile = UTIL.CellurizeVector(position)
+	tile = UTIL.cellurize_vector(position)
 	GameEvents.ingame_board_eventer.soldier_moved.connect(OnSoldierMove)
 	GameEvents.ingame_board_eventer.undo_soldier_move.connect(OnUndoSoldierMove)
 	HOOK_TILE.position.y = -7*64
 	HOOK_TILE.visible = true
 	HOOK_TILE.hide_static_soldier.connect(func(): $Soldier.visible = false)
 	SOLDIER.material.set_shader_parameter(
-		"influence", UTIL.CellurizeVector(position).y/100.0)
+		"influence", UTIL.cellurize_vector(position).y/100.0)
 	
 
 func OnSoldierMove(m: Move) -> void:
@@ -32,7 +32,7 @@ func OnSoldierMove(m: Move) -> void:
 		GameEvents.ingame_board_eventer.ascension.emit(
 			IngameBoardEventer.Ascension.new(
 				m.target_location,
-				UTIL.CellurizeVector(HOOK_TILE.global_position))
+				UTIL.cellurize_vector(HOOK_TILE.global_position))
 		)
 	if count_on:
 		move_count += 1
@@ -50,7 +50,7 @@ func Ascend() -> void:
 	var quick = IngameBoard.ascension_count >= IngameBoard.total_ascensions
 	
 	var soldier_exists: bool = GameEvents.ingame_board_eventer.request_data(
-		IngameBoardEventer.DATA_REQUESTS.DOES_SOLDIER_EXIST, UTIL.CellurizeVector(HOOK_TILE.global_position)
+		IngameBoardEventer.DATA_REQUESTS.DOES_SOLDIER_EXIST, UTIL.cellurize_vector(HOOK_TILE.global_position)
 	)
 	if soldier_exists:
 		held_soldier = true
@@ -95,10 +95,10 @@ func UnAscend() -> void:
 	if held_soldier:
 		GameEvents.ingame_board_eventer.emit_signal(
 			"request_place_soldier",
-			UTIL.CellurizeVector(HOOK_TILE.global_position)
+			UTIL.cellurize_vector(HOOK_TILE.global_position)
 		)
 		GameEvents.ingame_board_eventer.emit_signal(
 			"request_remove_soldier",
-			UTIL.CellurizeVector(HOOK_TILE.global_position) + Vector2i.UP
+			UTIL.cellurize_vector(HOOK_TILE.global_position) + Vector2i.UP
 		)
 		held_soldier = false

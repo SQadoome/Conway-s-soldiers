@@ -23,7 +23,7 @@ func set_boundires(boundry: Rect2) -> void:
 func move_camera(event: InputEventMouseMotion) -> void:
 	position -= event.relative/zoom
 	
-	var new_cell: Vector2i = UTIL.CellurizeVector(position)
+	var new_cell: Vector2i = UTIL.cellurize_vector(position)
 	if new_cell != old_cell:
 		camera_shifted.emit(old_cell, new_cell)
 		old_cell = new_cell

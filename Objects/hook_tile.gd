@@ -30,7 +30,7 @@ const HOOK: PackedScene = preload("res://Objects/Effects/ascend_hook.tscn")
 func CreateHook() -> void:
 	var hook: AscendHook = HOOK.instantiate()
 	reset.connect(hook.queue_free)
-	hook.SetUp(UTIL.CellurizeVector(position) + Vector2i(0, 7), quick)
+	hook.SetUp(UTIL.cellurize_vector(position) + Vector2i(0, 7), quick)
 	hook.soldier_got_hooked.connect(emit_signal.bind("hide_static_soldier"))
 	add_child(hook)
 

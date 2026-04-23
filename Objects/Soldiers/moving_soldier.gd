@@ -21,5 +21,5 @@ func SetProperties(from: Vector2, to: Vector2) -> void:
 
 func Update(new_pos: Vector2) -> void:
 	position = new_pos
-	if UTIL.CellurizeVector(new_pos).y < 0:
+	if UTIL.cellurize_vector(new_pos).y < 0:
 		get_node("Sprite2D").material.set_shader_parameter("influence", new_pos.y/6400)

@@ -11,7 +11,7 @@ var alive_locations: Dictionary[Vector2i, int] = {}
 var locations: PackedVector2Array = []
 var soldiers: Array[Soldier] = []
 
-var size: int = 36
+var size: int = 64
 var anchor: Vector2i = Vector2i.ZERO
 
 @export var camera: SmartCamera
@@ -20,8 +20,8 @@ func _enter_tree() -> void:
 	_instantiate();
 	
 	camera.camera_shifted.connect(_on_camera_shift);
-	camera.offset = Vector2(16, 16)*64;
-	camera.simulate_shift(Vector2(-16, -16));
+	camera.offset = Vector2(size/2, size/2)*64;
+	camera.simulate_shift(Vector2(-size/2, -size/2));
 	
 
 const SOLDIER: PackedScene = preload("res://Objects/Soldiers/soldier.tscn")
@@ -84,7 +84,9 @@ var state: Vector2i = Vector2i.ZERO
 func update_soldiers(shift_dir: Vector2i) -> void:
 	var new_dir: Vector2i = Vector2i(sign(shift_dir.x), sign(shift_dir.y))
 	var pointer: Vector2i = Vector2i.ZERO # pointer to current row/column
-	var x_count = 0
+	var iteration_count: int = 0
+	var start_time: int = Time.get_ticks_usec()
+	
 	for x in get_range(shift_dir.x):
 		# save changes
 		state.x = pointer_to_box(state.x, new_dir.x)
@@ -95,7 +97,7 @@ func update_soldiers(shift_dir: Vector2i) -> void:
 		
 		# move soliders
 		for y in size:
-			x_count += 1
+			iteration_count += 1
 			soldiers[(pointer.x)*size + y].position.x += (64*size)*new_dir.x
 			
 			# check if above line
@@ -129,6 +131,7 @@ func update_soldiers(shift_dir: Vector2i) -> void:
 		
 		# move soldiers
 		for x in size:
+			iteration_count += 1
 			soldiers[(x)*size + pointer.y].position.y += (64*size)*new_dir.y
 			
 			# check if above line
@@ -154,6 +157,10 @@ func update_soldiers(shift_dir: Vector2i) -> void:
 		else:
 			next.y = pointer_to_box(next.y, 1)
 			un_next.y = pointer_to_box(un_next.y, 1)
+		
+	var end_time: int = Time.get_ticks_usec()
+	print("Iterations: ", iteration_count, " | Estimated loop time: ", (end_time - start_time) / 1000000.0, " | FPS: ", Engine.get_frames_per_second())
+	
 
 
 ## from box to internal array state

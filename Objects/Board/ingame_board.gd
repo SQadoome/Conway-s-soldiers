@@ -1,68 +1,79 @@
 class_name IngameBoard
-extends Board
+extends Node2D
 
 var ghosts: Array[GhostSoldier] = []
 var movers: Array[MovingSoldier] = []
+var activation_detectors: Dictionary[Vector2i, ActivationDetector] = {}
 
 var level_data: LevelData
-@export var internal_board: InfiniteInternal
 
-func ShiftBackground(old_cell: Vector2i, new_cell: Vector2i) -> void:
-	super.ShiftBackground(old_cell, new_cell)
-	# account for infinite internal non-negative positions
-	# aka im to lazy to fix the "fuck this method" :)))
-	background.position += Vector2(0, 35/2)*64
+@export var internal_board: InfiniteInternal
+@export var line: Line
+@export var camera: SmartCamera
+@export var input_listener: BoardInput
+
+static var total_ascensions: int = 0
+static var ascension_count: int = 0
+
+const ASCENSION_TILE: PackedScene = preload("res://Objects/Board/Objects/ascend_tile.tscn")
+const GHOST_SOLDIER: PackedScene = preload("res://Objects/Soldiers/ghost_soldier.tscn")
+const BROKEN_SOLDIER: PackedScene = preload("res://Objects/Soldiers/broken_soldier.tscn")
+const ANIMATED_SOLDIER: PackedScene = preload("res://Objects/Soldiers/moving_soldier.tscn")
+
+var background: Node2D
 
 func _enter_tree() -> void:
+	total_ascensions = 0;
+	ascension_count = 0;
+	
+	input_listener.cell_clicked_left.connect(ValidateCellRequest);
+	input_listener.undo_request.connect(UndoLastMove);
+	
+	camera.camera_shifted.connect(shift_background);
+	camera.camera_shifted.connect(
+		func(old_cell: Vector2i, new_cell: Vector2i):
+			$Limit.position.x = (new_cell - old_cell).x*64 + 1920/2;
+	);
+	
 	for loc:Vector2i in level_data.ascensions:
-		PutAscend(loc)
+		PutAscend(loc);
 	
-	GameEvents.ingame_board_eventer.set_board(internal_board)
-
-func _ready() -> void:
-	total_ascensions = 0
-	ascension_count = 0
-	super()
+	GameEvents.ingame_board_eventer.set_board(internal_board);
 	
-	GameEvents.ingame_board_eventer.reset.connect(func(): CAMERA.SimulateShift(Vector2i(0, -35/2)))
-	GameEvents.ingame_board_eventer.ascension.connect(OnAscension)
+	GameEvents.ingame_board_eventer.reset.connect(func(): camera.SimulateShift(Vector2i(0, -35/2)));
+	GameEvents.ingame_board_eventer.ascension.connect(OnAscension);
 	
-	GameEvents.ingame_board_eventer.request_place_soldier.connect(
-		func(at_cell: Vector2i): internal_board.ReviveSoldier(at_cell)
-	)
-	GameEvents.ingame_board_eventer.request_remove_soldier.connect(
-		func(at_cell: Vector2i): 
-			internal_board.EraseSoldier(at_cell)
-	)
+	GameEvents.ingame_board_eventer.request_place_soldier.connect(internal_board.revive_soldier);
+	GameEvents.ingame_board_eventer.request_remove_soldier.connect(internal_board.erase_soldier);
 	GameEvents.ingame_board_eventer.request_soldier_move.connect(
 		func(from: Vector2, to: Vector2) -> void:
-			PlayMove(Move.new(from, to, [], {}))
-	)
+			PlayMove(Move.new(from, to, [], {}));
+	);
 	
-	CAMERA.camera_shifted.connect(
-		func(old_cell: Vector2i, shift_thing: Vector2i):
-			$Limit.position.x = shift_thing.x*64 + 1920/2
-			#internal_board.BoardShift(shift_thing))
-			)
-	input_listener.cell_clicked_left.connect(ValidateCellRequest)
-	input_listener.undo_request.connect(UndoLastMove)
+	GameEvents.ingame_board_eventer.add_activation_detector.connect(add_activation_detector)
+	GameEvents.ingame_board_eventer.update_activation_detector.connect(update_activation_detector)
 	
-	var line: Line = Line.new(CAMERA.camera_shifted)
-	line.position += Vector2(35*64/2, 0)
-	add_child(line)
+	background = Node2D.new();
+	for x in range(0, 35):
+		for y in range(-16, 16):
+			background.add_child(UTIL.create_bg_tile(Vector2(-x, y)));
+			background.add_child(UTIL.create_bg_tile(Vector2(x, y)));
+	background.z_index = -1
+	add_child(background);
 	
-	#CAMERA.offset = Vector2(35*64/2, 35*64/2)
-	#CAMERA.SimulateShift(Vector2(0, -35/2))
+
+func shift_background(old_cell: Vector2i, new_cell: Vector2i) -> void:
+	background.position = Vector2(new_cell*64) + Vector2(1920, 1080*2);
+	
 
 func _process(delta: float) -> void:
-	var cell: Vector2i = UTIL.CellurizeVector(get_global_mouse_position() + Vector2(32, 32))
+	var cell: Vector2i = UTIL.cellurize_vector(get_global_mouse_position() + Vector2(32, 32))
 	$Highlight.position = cell*64
 	if internal_board.does_soldier_exist(cell):
 		$Highlight.show()
 	else:
 		$Highlight.hide()
 
-#region move saving
 var moves: Array[Move] = []
 var move_count: int = 0
 var move_pointer: int = 0
@@ -90,7 +101,6 @@ func UndoLastMove() -> void:
 	moves.remove_at(move_count)
 	
 
-#endregion
 func ValidateCellRequest(cell: Vector2i) -> void:
 	for ghost:GhostSoldier in ghosts:
 		ghost.queue_free()
@@ -103,10 +113,6 @@ func ValidateCellRequest(cell: Vector2i) -> void:
 		$Selection.hide()
 	
 
-static var total_ascensions: int = 0
-static var ascension_count: int = 0
-
-const ASCENSION_TILE: PackedScene = preload("res://Objects/Board/Objects/ascend_tile.tscn")
 func PutAscend(at_cell: Vector2i) -> void:
 	var tile: AscendTile = ASCENSION_TILE.instantiate()
 	tile.position = at_cell*64
@@ -124,7 +130,7 @@ func OnAscension(a: IngameBoardEventer.Ascension) -> void:
 				input_listener.EnableInput()
 		)
 
-const GHOST_SOLDIER: PackedScene = preload("res://Objects/Soldiers/ghost_soldier.tscn")
+
 func CreateGhost(move: Move) -> void:
 	var ghost: GhostSoldier = GHOST_SOLDIER.instantiate()
 	ghost.SetProperties(move)
@@ -148,7 +154,6 @@ func PlayAudio(stream: AudioStream) -> void:
 	player.stream = stream
 	player.play()
 
-## play a soldier move
 const move_sfx: AudioStream = preload("res://Assets/Audio/MoveSound.mp3")
 func PlayMove(data: Move) -> void:
 	input_listener.DisableInput()
@@ -168,22 +173,33 @@ func PlayMove(data: Move) -> void:
 		internal_board.revive_soldier(data.target_location)
 		
 		ValidateCellRequest(data.target_location)
-		GameEvents.ingame_board_eventer.soldier_moved.emit(data)
+		GameEvents.ingame_board_eventer.soldier_moved.emit(data) 
+		
+		print(activation_detectors)
+		if activation_detectors.has(data.target_location):
+			activation_detectors[data.target_location].activate(data)
 	)
 	
 
-## broken soldier animation
-const BROKEN_SOLDIER: PackedScene = preload("res://Objects/Soldiers/broken_soldier.tscn")
 func BreakSoldier(at_cell: Vector2i) -> void:
 	var broken_soldier: BrokenSoldier = BROKEN_SOLDIER.instantiate()
 	broken_soldier.position = at_cell*64
 	add_child(broken_soldier)
 
-## moving soldier animation
-const ANIMATED_SOLDIER: PackedScene = preload("res://Objects/Soldiers/moving_soldier.tscn")
 func AnimateSoldier(from: Vector2i, to: Vector2i) -> MovingSoldier:
 	var animated_soldier: MovingSoldier = ANIMATED_SOLDIER.instantiate()
 	animated_soldier.SetProperties(from*64, to*64)
 	movers.append(animated_soldier)
 	add_child(animated_soldier)
 	return animated_soldier
+
+func add_activation_detector(detector: ActivationDetector) -> void:
+	assert(not activation_detectors.has(detector))
+	activation_detectors[detector.tile] = detector
+	
+
+func update_activation_detector(detector: ActivationDetector) -> void:
+	assert(activation_detectors.has(detector))
+	activation_detectors.erase(detector)
+	add_activation_detector(detector)
+	

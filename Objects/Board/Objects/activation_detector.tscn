@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsat3sbb3eemr"]
+
+[ext_resource type="Script" uid="uid://2lnpnda8muwu" path="res://Objects/Board/Objects/activation_detector.gd" id="1_nokqy"]
+
+[node name="ActivationDetector" type="Node2D"]
+script = ExtResource("1_nokqy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.333333)
