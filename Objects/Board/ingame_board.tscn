@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://ldm0fck332os"]
+[gd_scene load_steps=10 format=3 uid="uid://ldm0fck332os"]
 
 [ext_resource type="Script" uid="uid://dckclp5l3u0mg" path="res://Objects/Board/ingame_board.gd" id="1_yp2kk"]
 [ext_resource type="Script" uid="uid://diguoni3ywuiw" path="res://Objects/Board/Internal/infinite_internal.gd" id="2_m20tl"]
 [ext_resource type="PackedScene" uid="uid://bc4t8sh2p3q8k" path="res://Objects/Board/Objects/limit.tscn" id="3_6a368"]
+[ext_resource type="Texture2D" uid="uid://bw7lwdrgl75lm" path="res://Objects/Board/Objects/border.png" id="3_kbxgn"]
 [ext_resource type="Script" uid="uid://dkm6sp4gilxbu" path="res://Objects/Board/Objects/line.gd" id="3_pqcj4"]
 [ext_resource type="Texture2D" uid="uid://cfxj4253ty40a" path="res://Assets/Sprites/highlight.png" id="3_q6vii"]
 [ext_resource type="Script" uid="uid://cp51sxaulbo1u" path="res://Objects/Board/board_input.gd" id="4_a6dh7"]
@@ -22,6 +23,13 @@ camera = NodePath("../SmartCamera")
 metadata/_custom_type_script = "uid://diguoni3ywuiw"
 
 [node name="Line" type="Line2D" parent="."]
+texture_filter = 1
+points = PackedVector2Array(754, 14, 1395, -30, 1667, -80, 1976, 63, 1101, -259)
+width = 16.04
+default_color = Color(1, 0, 0, 1)
+texture = ExtResource("3_kbxgn")
+texture_mode = 1
+sharp_limit = 2.02
 script = ExtResource("3_pqcj4")
 metadata/_custom_type_script = "uid://dkm6sp4gilxbu"
 

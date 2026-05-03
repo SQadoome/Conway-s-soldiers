@@ -12,4 +12,7 @@ activation_detector = NodePath("ActivationDetector")
 texture = ExtResource("2_phtdt")
 
 [node name="ActivationDetector" parent="." instance=ExtResource("3_p8p1k")]
+
+[node name="Sprite2D2" type="Sprite2D" parent="ActivationDetector"]
+modulate = Color(1, 1, 1, 0.254902)
 texture = ExtResource("2_phtdt")

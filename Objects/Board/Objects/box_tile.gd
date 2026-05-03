@@ -7,11 +7,16 @@ var punch_power: int = 10
 var direction: Vector2i = Vector2i.RIGHT
 
 func _enter_tree() -> void:
+	pass
+
+func _ready() -> void:
 	activation_detector.activated.connect(_on_activation)
 	activation_detector.set_tile(UTIL.cellurize_vector(position) + direction)
+	
 
 func move(to_cell: Vector2i) -> void:
 	position = to_cell*64
+	
 
 func _rotate(dir: UTIL.DIRECTIONS) -> void:
 	pass

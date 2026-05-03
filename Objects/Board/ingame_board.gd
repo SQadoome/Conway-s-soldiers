@@ -50,7 +50,6 @@ func _enter_tree() -> void:
 			PlayMove(Move.new(from, to, [], {}));
 	);
 	
-	GameEvents.ingame_board_eventer.add_activation_detector.connect(add_activation_detector)
 	GameEvents.ingame_board_eventer.update_activation_detector.connect(update_activation_detector)
 	
 	background = Node2D.new();
@@ -120,13 +119,13 @@ func PutAscend(at_cell: Vector2i) -> void:
 	add_child(tile)
 
 func OnAscension(a: IngameBoardEventer.Ascension) -> void:
-	internal_board.EraseSoldier(a.ascend_tile)
-	if internal_board.DoesSoldierExist(a.hook_tile):
+	internal_board.erase_soldier(a.ascend_tile)
+	if internal_board.does_soldier_exist(a.hook_tile):
 		input_listener.DisableInput()
-		internal_board.EraseSoldier(a.hook_tile)
+		internal_board.erase_soldier(a.hook_tile)
 		AnimateSoldier(a.hook_tile, a.hook_tile + Vector2i.UP).finished.connect(
 			func():
-				internal_board.ReviveSoldier(a.hook_tile + Vector2i.UP)
+				internal_board.revive_soldier(a.hook_tile + Vector2i.UP)
 				input_listener.EnableInput()
 		)
 
@@ -175,7 +174,6 @@ func PlayMove(data: Move) -> void:
 		ValidateCellRequest(data.target_location)
 		GameEvents.ingame_board_eventer.soldier_moved.emit(data) 
 		
-		print(activation_detectors)
 		if activation_detectors.has(data.target_location):
 			activation_detectors[data.target_location].activate(data)
 	)
@@ -188,18 +186,11 @@ func BreakSoldier(at_cell: Vector2i) -> void:
 
 func AnimateSoldier(from: Vector2i, to: Vector2i) -> MovingSoldier:
 	var animated_soldier: MovingSoldier = ANIMATED_SOLDIER.instantiate()
-	animated_soldier.SetProperties(from*64, to*64)
+	animated_soldier.set_properties(from*64, to*64)
 	movers.append(animated_soldier)
 	add_child(animated_soldier)
 	return animated_soldier
 
-func add_activation_detector(detector: ActivationDetector) -> void:
-	assert(not activation_detectors.has(detector))
-	activation_detectors[detector.tile] = detector
-	
-
 func update_activation_detector(detector: ActivationDetector) -> void:
-	assert(activation_detectors.has(detector))
-	activation_detectors.erase(detector)
-	add_activation_detector(detector)
+	activation_detectors.set(detector.tile, detector)
 	

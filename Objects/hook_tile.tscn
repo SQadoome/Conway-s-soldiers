@@ -93,6 +93,22 @@ texture = ExtResource("1_jvcch")
 region_enabled = true
 region_rect = Rect2(308, 16, 50, 52)
 
+[node name="Shadow2" type="Sprite2D" parent="Hole"]
+z_index = 2
+position = Vector2(-0.500002, 20)
+scale = Vector2(0.86, 0.403846)
+texture = ExtResource("1_jvcch")
+region_enabled = true
+region_rect = Rect2(308, 16, 50, 52)
+
+[node name="Shadow3" type="Sprite2D" parent="Hole"]
+z_index = 2
+position = Vector2(-0.500002, 20)
+scale = Vector2(0.86, 0.403846)
+texture = ExtResource("1_jvcch")
+region_enabled = true
+region_rect = Rect2(308, 16, 50, 52)
+
 [node name="Cracks" type="Sprite2D" parent="."]
 visible = false
 texture = ExtResource("2_0xrlt")

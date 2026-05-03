@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://13ttsj1s0841"]
+[gd_scene load_steps=8 format=3 uid="uid://13ttsj1s0841"]
 
 [ext_resource type="Script" uid="uid://cnjijnystrb4f" path="res://Objects/Core/game_handler.gd" id="1_n0gla"]
 [ext_resource type="PackedScene" uid="uid://ldm0fck332os" path="res://Objects/Board/ingame_board.tscn" id="2_dq0po"]
 [ext_resource type="Script" uid="uid://whreqvaxh3gq" path="res://Objects/Core/music_player.gd" id="2_e01br"]
+[ext_resource type="PackedScene" uid="uid://ccvb2128g84oy" path="res://Objects/Board/Objects/jack_in_the_box_tile.tscn" id="5_20bb2"]
 [ext_resource type="PackedScene" uid="uid://cepsy81kbnd2g" path="res://Objects/GUI/ui.tscn" id="6_eulsj"]
 [ext_resource type="PackedScene" uid="uid://cyd55jeysayyw" path="res://Objects/Board/Objects/box_tile.tscn" id="7_h2vvs"]
 [ext_resource type="PackedScene" uid="uid://b32aoits778tg" path="res://Objects/Effects/start_popup.tscn" id="8_m53db"]
@@ -26,6 +27,9 @@ modulate = Color(0.76, 0.76, 0.76, 0.615686)
 
 [node name="BoxTile" parent="CanvasLayer" instance=ExtResource("7_h2vvs")]
 position = Vector2(0, -128)
+
+[node name="JackInTheBoxTile" parent="CanvasLayer" instance=ExtResource("5_20bb2")]
+position = Vector2(384, -128)
 
 [node name="IngameBoard" parent="CanvasLayer" instance=ExtResource("2_dq0po")]
 

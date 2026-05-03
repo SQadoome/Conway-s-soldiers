@@ -46,7 +46,6 @@ func set_board(_BOARD: InfiniteInternal) -> void:
 	data_requests[DATA_REQUESTS.DOES_SOLDIER_EXIST] = func(arg: Variant) -> bool:
 		return BOARD.does_soldier_exist(arg as Vector2i)
 	
-	
 
 func request_data(request: DATA_REQUESTS, arg: Variant) -> Variant:
 	assert(DATA_REQUESTS.size() == data_requests.size(), "Missing data requests!")
@@ -61,7 +60,6 @@ signal request_soldier_move(from: Vector2i, to: Vector2i)
 signal request_place_soldier(tile: Vector2i)
 signal request_remove_soldier(tile: Vector2i)
 
-signal add_activation_detector(activation_detector: ActivationDetector)
 signal update_activation_detector(activation_detector: ActivationDetector)
 
 signal leave

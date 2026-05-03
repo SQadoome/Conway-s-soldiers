@@ -7,6 +7,7 @@ signal dull
 func _init(shift_signal: Signal = dull) -> void:
 	if shift_signal != dull:
 		shift_signal.connect(update_line)
+	clear_points()
 
 func update_line(board_cell: Vector2i) -> void:
 	set_point_position(0, Vector2(board_cell.x*64 + -2000, -32))

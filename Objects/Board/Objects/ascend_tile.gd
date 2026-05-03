@@ -11,28 +11,35 @@ var count_on: bool = false
 var move_count: int = 0
 var held_soldier: bool = false
 
-@onready var HOOK_TILE: HookTile = get_node("HookTile")
-@onready var SOLDIER: Sprite2D = get_node("Soldier")
+@export var hook_tile: HookTile
+@export var soldier_sprite: Sprite2D
+@export var activation_detector: ActivationDetector
 
-func _ready() -> void:
+func _enter_tree() -> void:
 	tile = UTIL.cellurize_vector(position)
-	GameEvents.ingame_board_eventer.soldier_moved.connect(OnSoldierMove)
 	GameEvents.ingame_board_eventer.undo_soldier_move.connect(OnUndoSoldierMove)
-	HOOK_TILE.position.y = -7*64
-	HOOK_TILE.visible = true
-	HOOK_TILE.hide_static_soldier.connect(func(): $Soldier.visible = false)
-	SOLDIER.material.set_shader_parameter(
-		"influence", UTIL.cellurize_vector(position).y/100.0)
 	
 
-func OnSoldierMove(m: Move) -> void:
-	if m.target_location == tile and not ascended:
+func _ready() -> void:
+	activation_detector.activated.connect(_on_soldier_detected)
+	activation_detector.set_tile(UTIL.cellurize_vector(global_position))
+	
+	hook_tile.position.y = -7*64
+	hook_tile.visible = true
+	hook_tile.hide_static_soldier.connect(func(): $Soldier.visible = false)
+	soldier_sprite.material.set_shader_parameter(
+		"influence", UTIL.cellurize_vector(position).y/100.0
+	)
+	
+
+func _on_soldier_detected(m: Move) -> void:
+	if not ascended:
 		count_on = true
 		Ascend()
 		GameEvents.ingame_board_eventer.ascension.emit(
 			IngameBoardEventer.Ascension.new(
 				m.target_location,
-				UTIL.cellurize_vector(HOOK_TILE.global_position))
+				UTIL.cellurize_vector(hook_tile.global_position))
 		)
 	if count_on:
 		move_count += 1
@@ -50,13 +57,13 @@ func Ascend() -> void:
 	var quick = IngameBoard.ascension_count >= IngameBoard.total_ascensions
 	
 	var soldier_exists: bool = GameEvents.ingame_board_eventer.request_data(
-		IngameBoardEventer.DATA_REQUESTS.DOES_SOLDIER_EXIST, UTIL.cellurize_vector(HOOK_TILE.global_position)
+		IngameBoardEventer.DATA_REQUESTS.DOES_SOLDIER_EXIST, UTIL.cellurize_vector(hook_tile.global_position)
 	)
 	if soldier_exists:
 		held_soldier = true
 	
-	HOOK_TILE.HookBreakOut(quick)
-	SOLDIER.visible = true
+	hook_tile.HookBreakOut(quick)
+	soldier_sprite.visible = true
 	ascended = true
 	color_tween = create_tween()
 	shine_tween = create_tween()
@@ -85,8 +92,8 @@ func UnAscend() -> void:
 		color_tween.kill()
 		shine_tween.kill()
 	
-	SOLDIER.visible = false
-	HOOK_TILE.Reset()
+	soldier_sprite.visible = false
+	hook_tile.Reset()
 	get_node("Shine").modulate = Color(1.0, 1.0, 1.0, 0.0)
 	get_node("Tile").modulate = Color8(200, 200, 200, 255)
 	ascended = false
@@ -95,10 +102,10 @@ func UnAscend() -> void:
 	if held_soldier:
 		GameEvents.ingame_board_eventer.emit_signal(
 			"request_place_soldier",
-			UTIL.cellurize_vector(HOOK_TILE.global_position)
+			UTIL.cellurize_vector(hook_tile.global_position)
 		)
 		GameEvents.ingame_board_eventer.emit_signal(
 			"request_remove_soldier",
-			UTIL.cellurize_vector(HOOK_TILE.global_position) + Vector2i.UP
+			UTIL.cellurize_vector(hook_tile.global_position) + Vector2i.UP
 		)
 		held_soldier = false

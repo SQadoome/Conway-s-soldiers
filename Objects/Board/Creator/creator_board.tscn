@@ -18,10 +18,9 @@ texture_region_size = Vector2i(128, 128)
 tile_size = Vector2i(128, 128)
 sources/0 = SubResource("TileSetAtlasSource_feo6v")
 
-[node name="CreatorBoard" type="Node2D" node_paths=PackedStringArray("OBJECTS", "CAMERA")]
+[node name="CreatorBoard" type="Node2D" node_paths=PackedStringArray("OBJECTS")]
 script = ExtResource("1_gohk1")
 OBJECTS = NodePath("Objects")
-CAMERA = NodePath("SmartCamera")
 
 [node name="SmartCamera" type="Camera2D" parent="."]
 script = ExtResource("3_jmccm")

@@ -2,7 +2,8 @@
 
 [ext_resource type="Script" uid="uid://dacojj2rdp4j8" path="res://Objects/Soldiers/moving_soldier.gd" id="1_8xhkx"]
 [ext_resource type="Texture2D" uid="uid://d0e5vud05hnw6" path="res://Assets/Sprites/Soldier.png" id="2_8xhkx"]
-[ext_resource type="Shader" uid="uid://bkq8rks1krgdh" path="res://Objects/Soldiers/soldier.gdshader" id="2_sy7ir"]
+[ext_resource type="Shader" uid="uid://bkq8rks1krgdh" path="res://Objects/Board/Objects/soldier.gdshader" id="2_sy7ir"]
+
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8xhkx"]
 shader = ExtResource("2_sy7ir")

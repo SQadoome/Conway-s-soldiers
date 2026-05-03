@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dv3g05lo65ac6"]
+[gd_scene load_steps=9 format=3 uid="uid://dv3g05lo65ac6"]
 
 [ext_resource type="Script" uid="uid://dyu0kvmjw7x76" path="res://Objects/Board/Objects/ascend_tile.gd" id="1_ig1pw"]
 [ext_resource type="Texture2D" uid="uid://wx3k7kag0uas" path="res://Assets/Sprites/ascend_tile.png" id="2_2ebah"]
 [ext_resource type="Texture2D" uid="uid://c72wapy135gdg" path="res://Assets/Sprites/ascend_shine.png" id="3_873hf"]
 [ext_resource type="PackedScene" uid="uid://ck8joof0llo2w" path="res://Objects/hook_tile.tscn" id="4_txp6g"]
 [ext_resource type="Texture2D" uid="uid://d0e5vud05hnw6" path="res://Assets/Sprites/Soldier.png" id="5_cevbj"]
+[ext_resource type="PackedScene" uid="uid://bsat3sbb3eemr" path="res://Objects/Board/Objects/activation_detector.tscn" id="6_0gjj4"]
 
 [sub_resource type="Shader" id="Shader_cevbj"]
 code = "shader_type canvas_item;
@@ -36,9 +37,12 @@ shader = SubResource("Shader_cevbj")
 shader_parameter/influence = 0.0
 shader_parameter/speed = 0.2
 
-[node name="AscendTile" type="Node2D"]
+[node name="AscendTile" type="Node2D" node_paths=PackedStringArray("hook_tile", "soldier_sprite", "activation_detector")]
 z_index = -1
 script = ExtResource("1_ig1pw")
+hook_tile = NodePath("HookTile")
+soldier_sprite = NodePath("Soldier")
+activation_detector = NodePath("ActivationDetector")
 
 [node name="Tile" type="Sprite2D" parent="."]
 modulate = Color(0.843184, 0.843184, 0.843184, 1)
@@ -58,3 +62,5 @@ z_index = 1
 material = SubResource("ShaderMaterial_ie7ou")
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_cevbj")
+
+[node name="ActivationDetector" parent="." instance=ExtResource("6_0gjj4")]
