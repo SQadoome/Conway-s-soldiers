@@ -21,7 +21,7 @@ static func IsTherePortalToHoldHook(at_cell: Vector2i) -> AscendPortal:
 		Vector2(-1, 1),Vector2(0, 1),Vector2(1, 1)
 	]
 	for portal:AscendPortal in portals:
-		var portal_cell: Vector2i = UTIL.CellurizeVector(portal.global_position)
+		var portal_cell: Vector2i = TileUtil.CellurizeVector(portal.global_position)
 		if cells.has(at_cell - portal_cell - Vector2i(0, portal_y_offset)):
 			return portal
 	return null
@@ -83,7 +83,7 @@ func Reveal() -> void:
 		#STRUCTURE.scale.x = -1
 		#$Structure/Abducter/Line2D/Hook/HookedSoldier.scale.x = -0.5
 	#
-	#var influence: float = UTIL.CellurizeVector(position).y/100.0
+	#var influence: float = TileUtil.CellurizeVector(position).y/100.0
 	#$TempSoldier.material.set_shader_parameter("influence", influence)
 	#$Structure/Abducter/Line2D/Hook/HookedSoldier.material.set_shader_parameter("influence", influence)
 	#
@@ -148,7 +148,7 @@ func Reveal() -> void:
 #func ColorizeSoldier() -> void:
 	#$TempSoldier.material.set_shader_parameter(
 		#"influence",
-		#UTIL.CellurizeVector(position).y/100.0
+		#TileUtil.CellurizeVector(position).y/100.0
 	#)
 #
 #func AnimateHook() -> void:

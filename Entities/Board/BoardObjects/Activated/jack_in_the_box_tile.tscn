@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccvb2128g84oy"]
+
+[ext_resource type="Script" uid="uid://c5cyvagnbgnui" path="res://Entities/Board/BoardObjects/Activated/jack_in_the_box_tile.gd" id="1_67ud0"]
+[ext_resource type="Texture2D" uid="uid://wb5lv5l6ft83" path="res://Assets/Sprites/jack_in_the_box.png" id="1_w2arj"]
+[ext_resource type="PackedScene" uid="uid://bsat3sbb3eemr" path="res://Entities/Board/BoardObjects/Activated/activation_detector.tscn" id="3_w46ui"]
+
+[node name="JackInTheBoxTile" type="Node2D" node_paths=PackedStringArray("activation_detector")]
+script = ExtResource("1_67ud0")
+activation_detector = NodePath("ActivationDetector")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_w2arj")
+
+[node name="ActivationDetector" parent="." instance=ExtResource("3_w46ui")]
+
+[node name="Sprite2D2" type="Sprite2D" parent="ActivationDetector"]
+modulate = Color(1, 1, 1, 0.32549)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_w2arj")

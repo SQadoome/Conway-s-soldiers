@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dqiw5b8w4tddt"]
 
-[ext_resource type="PackedScene" uid="uid://ldm0fck332os" path="res://Scenes/CoreScenes/ingame_board.tscn" id="1_inrh2"]
-[ext_resource type="Script" uid="uid://e6fhl6wg56ox" path="res://classes/smart_camera.gd" id="2_5s1dx"]
+[ext_resource type="PackedScene" uid="uid://ldm0fck332os" path="res://Entities/Board/GameBoard/game_board.tscn" id="1_inrh2"]
+[ext_resource type="Script" uid="uid://e6fhl6wg56ox" path="res://Entities/Utility/smart_camera.gd" id="2_5s1dx"]
 
 [node name="LevelCreator" type="Node2D"]
 

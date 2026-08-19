@@ -1,27 +1,24 @@
 class_name BoardObject
-extends Node2D
+extends Node
 
-signal cell_changed(new_cell: Vector2i)
-signal size_changed(new_size: Vector2)
-signal name_changed(new_name: String)
+var cell: Vector2 = Vector2.ZERO
+var occupies_tile: bool = false
 
-var properties_holder: PropertiesHolder
-var object_name: String
-var size: Vector2
+var components: Dictionary[BObjectComponent.Components, Resource] = {}
 
-func _ready() -> void:
-	properties_holder = load("res://Objects/GUI/properties.tscn").instantiate()
-	add_child(properties_holder)
-	properties_holder.global_position = global_position + Vector2(64, 0)
+func has_component(comp_type: BObjectComponent.Components) -> bool:
+	return components.has(comp_type);
+	
 
-# Override
-func SetCell(new_cell: Vector2i) -> void:
-	position = new_cell*64
-	emit_signal("cell_changed", new_cell)
+func get_component(comp_type: BObjectComponent.Components) -> BObjectComponent:
+	if (components.has(comp_type) == false):
+		assert(false);
+		return null;
+	return components[comp_type];
+	
 
-func SetSize(size: Vector2) -> void:
-	self.size = size
-
-func SetName(object_name: String) -> void:
-	self.object_name = object_name
-	emit_signal("name_changed", object_name)
+func add_component(comp: BObjectComponent) -> void:
+	assert(not components.has(comp.type));
+	components[comp.type] = comp;
+	comp.board_object = self;
+	

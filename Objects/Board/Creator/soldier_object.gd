@@ -7,4 +7,4 @@ func _ready() -> void:
 	properties_holder.AddProperty(
 		PositionProperty.new(cell_changed)
 	)
-	emit_signal("cell_changed", UTIL.CellurizeVector(position))
+	emit_signal("cell_changed", TileUtil.CellurizeVector(position))

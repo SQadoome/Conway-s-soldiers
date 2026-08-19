@@ -10,4 +10,4 @@ func _ready() -> void:
 		SizeProperty.new(size_changed)
 	)
 	emit_signal("size_changed", Vector2(1, 1))
-	emit_signal("cell_changed", UTIL.CellurizeVector(position))
+	emit_signal("cell_changed", TileUtil.CellurizeVector(position))

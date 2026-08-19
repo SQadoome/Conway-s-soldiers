@@ -17,6 +17,11 @@ boot_splash/show_image=false
 boot_splash/fullsize=false
 config/icon="uid://dfcgkbt3hq3n6"
 
+[autoload]
+
+GlobalAssets="*res://Entities/Utility/global_assets.gd"
+BoardObjectManager="*res://Entities/Core/board_object_manager.gd"
+
 [display]
 
 window/size/viewport_width=1920

@@ -1,26 +1,24 @@
 class_name MoveSet
 extends Resource
 
-## the MoveInstructions holds data for directions of the move from an origin not the final
-## result for the move
-class MoveInstructions extends Resource:
-	var target: Vector2i
-	var victims: PackedVector2Array
-	var conditions: Dictionary[Vector2i, bool]
-	func _init(target: Vector2i, victims: PackedVector2Array, conditions: Dictionary[Vector2i, bool]) -> void:
-		self.target = target
-		self.victims = victims
-		self.conditions = conditions
-	func _to_string() -> String:
-		return "target: " + str(target) + " | victims: " + str(victims) + " | conditions: " + str(conditions)
+var instructions: Array[MoveInstruction] = []
 
-var moves_data: Array[MoveInstructions] = []
+func _init(_insts: Array[MoveInstruction] = []) -> void:
+	instructions = _insts;
+	
 
-func _init(data: Array[Dictionary]) -> void:
-	for dic:Dictionary in data:
-		moves_data.append(
-			MoveInstructions.new(
-				dic["target"], dic["victims"], dic["conditions"]
-			)
-		)
-	pass
+func add_instruction(inst: MoveInstruction) -> void:
+	instructions.append(inst);
+	
+
+func parse_moves(from: Vector2) -> Array[Move]:
+	var moves: Array[Move] = [];
+	
+	for inst:MoveInstruction in instructions:
+		if (not inst.can_play(from)):
+			continue;
+		moves.append(inst.parse(from));
+		
+	
+	return moves;
+	

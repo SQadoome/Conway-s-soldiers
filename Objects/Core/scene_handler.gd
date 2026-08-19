@@ -40,6 +40,6 @@ func _ready() -> void:
 	)
 
 func NewGame(level_data: LevelData) -> void:
-	game_handler= load("res://Objects/Core/game_handler.tscn").instantiate()
+	game_handler = load("res://Objects/Core/game_handler.tscn").instantiate()
 	game_handler.level_data = level_data
 	add_child(game_handler)

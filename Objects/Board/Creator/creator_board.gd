@@ -110,10 +110,10 @@ func ChangeGameRule(key: String, value: Variant) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		if DoesObjectOnMouseExist():
-			RemoveObject(UTIL.cellurize_vector(get_global_mouse_position() + Vector2(32, 32)))
+			RemoveObject(TileUtil.cellurize_vector(get_global_mouse_position() + Vector2(32, 32)))
 
 func DoesObjectOnMouseExist() -> bool:
-	var cell: Vector2i = UTIL.cellurize_vector(get_global_mouse_position() + Vector2(32, 32))
+	var cell: Vector2i = TileUtil.cellurize_vector(get_global_mouse_position() + Vector2(32, 32))
 	var id: int = OBJECTS.get_cell_source_id(cell)
 	return (not (id == -1))
 

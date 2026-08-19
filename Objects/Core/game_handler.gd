@@ -7,13 +7,10 @@ var level_data: LevelData
 @export var board: IngameBoard
 
 func _enter_tree() -> void:
-	board.level_data = level_data
+	board.load_level(level_data);
 	
 
 func _ready() -> void:
-	$GUI/StartPopup.Animate()
-	$CanvasLayer/BoxTile._rotate(UTIL.DIRECTIONS.RIGHT)
-	$CanvasLayer/BoxTile.move(UTIL.cellurize_vector($CanvasLayer/BoxTile.position))
 	GameEvents.ingame_board_eventer.soldier_moved.connect(GeneratePopup)
 	GameEvents.ingame_board_eventer.finish.connect(
 		func():

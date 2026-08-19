@@ -80,7 +80,7 @@ func ChangePage(new_page: pages) -> void:
 	for level:int in range(levels[page]["normal_levels"], 0, -1):
 		var slot = get_node("VBoxContainer/Normals/Slot" + str(level))
 		slot.modulate = Color(1, 1, 1, 1)
-		slot.get_node("RichTextLabel").text = LevelReader.ReadLevel(levels[page]["tag"] + "_" + str(level) + ".level").level_name
+		#slot.get_node("RichTextLabel").text = LevelReader.ReadLevel(levels[page]["tag"] + "_" + str(level) + ".level").level_name
 		slot.get_node("Level").texture = load("res://Levels/Main/" + levels[page]["tag"] + "_" + str(level) + ".png")
 		
 		for i:int in range(1, 4):
@@ -99,7 +99,7 @@ func ChangePage(new_page: pages) -> void:
 		button_style.bg_color = levels[page]["color"]
 		
 		slot.get_node("Difficulty").texture = load(levels[page]["difficulty"])
-		slot.get_node("RichTextLabel").text = LevelReader.ReadLevel(levels[page]["tag"] + "_challenge_" + str(challenge) + ".level").level_name
+		#slot.get_node("RichTextLabel").text = LevelReader.ReadLevel(levels[page]["tag"] + "_challenge_" + str(challenge) + ".level").level_name
 		slot.get_node("Level").texture = load("res://Levels/Main/" + levels[page]["tag"] + "_challenge_" + str(challenge) + ".png")
 		
 		for i:int in range(1, 4):
