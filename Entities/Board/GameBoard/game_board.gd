@@ -34,11 +34,11 @@ func _ready() -> void:
 				BoardObjectManager.create_soldier(Vector2(x, y));
 	
 	var box: Callable = func():
-		for x in 5:
-			for y in 5:
+		for x in 4:
+			for y in 4:
 				BoardObjectManager.create_soldier(Vector2(x, y))
 	
-	huge.call();
+	box.call();
 	
 
 func _on_camera_shift(old_cell: Vector2, new_cell: Vector2) -> void:
