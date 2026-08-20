@@ -49,7 +49,8 @@ func does_soldier_exist(at_cell: Vector2) -> bool:
 	
 
 func create_soldier(at_cell: Vector2) -> void:
-	printerr("Created at: ", at_cell)
+	assert(not soldiers.has(at_cell));
+	
 	var pos: Vector2 = TileUtil.vectorize_cell(at_cell);
 	var ci_rid: RID = RenderingServer.canvas_item_create();
 	if (sd_canvas_setted == false):
@@ -81,12 +82,11 @@ func create_soldiers(cells: PackedVector2Array) -> void:
 
 func destroy_soldier(at_cell: Vector2) -> void:
 	assert(soldiers.has(at_cell) or hidden_soldiers.has(at_cell));
-	printerr("Destroyed at: ", at_cell);
 	
 	if (soldiers.has(at_cell)):
-		RenderingServer.canvas_item_set_parent(soldiers[at_cell], RID());
 		RenderingServer.canvas_item_reset_physics_interpolation(soldiers[at_cell]);
 		RenderingServer.free_rid(soldiers[at_cell]);
+		printerr(soldiers[at_cell])
 		soldiers.erase(at_cell);
 		return
 	

@@ -26,14 +26,16 @@ func _ready() -> void:
 	camera.camera_shifted.connect(_on_camera_shift)
 	
 	var huge: Callable = func():
-		for x in 25:
-			for y in 20:
-				BoardObjectManager.create_soldier(Vector2(x, y))
-				BoardObjectManager.create_soldier(Vector2(-x, y))
+		for x in range(0, 25):
+			for y in range(0, 20):
+				BoardObjectManager.create_soldier(Vector2(x, y));
+		for x in range(-25, 0):
+			for y in range(0, 20):
+				BoardObjectManager.create_soldier(Vector2(x, y));
 	
 	var box: Callable = func():
-		for x in 3:
-			for y in 3:
+		for x in 5:
+			for y in 5:
 				BoardObjectManager.create_soldier(Vector2(x, y))
 	
 	huge.call();
@@ -100,7 +102,6 @@ func play_move(move: Move) -> void:
 	BoardObjectManager.destroy_soldiers(move.victims);
 	
 	break_soldiers(move.victims);
-	break_soldier(move.origin);
 	
 	var anim_query := AnimationObjectQuery.new();
 	anim_query.from = move.origin;
